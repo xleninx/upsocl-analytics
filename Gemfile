@@ -17,6 +17,12 @@ gem 'coffee-rails', '~> 4.1.0'
 # ActiveAdmin
 gem 'activeadmin', '~> 1.0.0.pre1'
 
+# Google analytics gem
+gem 'google-api-client'
+
+# Slim html
+gem 'slim'
+
 # Devise
 gem 'devise'
 
