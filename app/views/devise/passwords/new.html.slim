@@ -1,0 +1,18 @@
+.middle-box.text-center.loginscreen.animated.fadeInDown
+  div
+    div
+      = image_tag('logo-upsocl.png')
+    h3 Recuperar de Contraseña
+    p
+      | Ingresa tu correo electronico y te enviaremos un email con las instrucciones para recuperar tu contraseña
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      = devise_error_messages! 
+      .form-group
+        = f.email_field :email, autofocus: true, class:"form-control", placeholder:'Email'
+
+      = f.submit "Recuperar", class:'btn btn-primary block full-width m-b'
+
+      = link_to new_session_path(resource_name) do
+          small Iniciar Sesion
+    p.m-t
+      small Upsocl.com &copy; 2015
