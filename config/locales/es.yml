@@ -1,5 +1,31 @@
 ---
 es:
+  activerecord:
+    models:
+      user:
+        one: Usuario
+        other: Usuarios
+      campaign:
+        one: Campaña
+        other: Campañas
+      admin_user:
+        one: Administrador
+        other: Administradores
+    attributes:
+      user/active:
+        true_value: Cliente Activo
+        false_value: Cliente Inactivo
+      user:
+        name: Nombre
+        current_sign_in_at: Actual inicio de sesion
+        created_at: Creado el
+        active: Activo
+        campaigns: Campañas
+      campaign:
+        name: Nombre
+        users: Usuarios
+
+
   date:
     abbr_day_names:
     - dom
