@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_and_belongs_to_many :campaigns
+
+  def join_campaigns
+    campaigns.map(&:name).join(', ')
+  end
 end
