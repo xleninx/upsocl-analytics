@@ -4,6 +4,8 @@ class Campaign < ActiveRecord::Base
 
   accepts_nested_attributes_for :urls, allow_destroy: :true
 
+  validates :name, presence: true
+
   def join_users
     users.map(&:name).join(', ')
   end

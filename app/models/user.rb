@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :campaigns
 
+  validates :name, presence: true
+
   def join_campaigns
     campaigns.map(&:name).join(', ')
   end
