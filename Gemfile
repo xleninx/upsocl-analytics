@@ -16,6 +16,16 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# Validate url
+gem 'validate_url'
+
+#Social analytics
+gem 'social_shares'
+
+#Take screen to page
+gem 'imgkit'
+gem 'wkhtmltoimage-binary'
+
 # ActiveAdmin
 gem 'activeadmin', '~> 1.0.0.pre1'
 
