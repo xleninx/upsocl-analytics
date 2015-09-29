@@ -1,0 +1,154 @@
+  
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-sm-4
+    h2 Campa&ntilde;a: {{ campaign.name }} 
+    ol.breadcrumb
+      li
+        a href="/"  Inicio
+      li 
+        a href='/' ui-sref="campaigns" Campa&ntilde;as
+      li.active
+        strong 
+          | {{ campaign.name }}
+
+.wrapper.wrapper-content
+  .row
+    .col-lg-3
+      .ibox.float-e-margins.text-center
+        .ibox-title
+          span.label.label-success.pull-right Facebook
+          h5 Total
+        .ibox-content
+          h1.no-margins 40 886,200
+          small Veces Compartido
+    .col-lg-3
+      .ibox.float-e-margins.text-center
+        .ibox-title
+          span.label.label-info.pull-right Twitter
+          h5 Total
+        .ibox-content
+          h1.no-margins 275,800
+          small Veces Compartido
+    .col-lg-3
+      .ibox.float-e-margins.text-center
+        .ibox-title
+          span.label.label-primary.pull-right Impresiones
+          h5 Visitas
+        .ibox-content
+          h1.no-margins 106,120
+          small Visitas
+    .col-lg-3
+      .ibox.float-e-margins
+        .ibox-title
+          span.label.label-danger.pull-right Low value
+          h5 User activity
+        .ibox-content
+          h1.no-margins 80,600
+          .stat-percent.font-bold.text-danger
+            | 38%
+            i.fa.fa-level-down
+          small In first month
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-title
+          h5 Orders
+          .pull-right
+            .btn-group
+              button.btn.btn-xs.btn-white.active type="button"  Today
+              button.btn.btn-xs.btn-white type="button"  Monthly
+              button.btn.btn-xs.btn-white type="button"  Annual
+        .ibox-content
+          .row
+            .col-lg-9
+              .flot-chart
+                #flot-dashboard-chart.flot-chart-content
+            .col-lg-3
+              ul.stat-list
+                li
+                  h2.no-margins 2,346
+                  small Total orders in period
+                  .stat-percent
+                    | 48%
+                    i.fa.fa-level-up.text-navy
+                  .progress.progress-mini
+                    .progress-bar style=("width: 48%;") 
+                li
+                  h2.no-margins 4,422
+                  small Orders in last month
+                  .stat-percent
+                    | 60%
+                    i.fa.fa-level-down.text-navy
+                  .progress.progress-mini
+                    .progress-bar style=("width: 60%;") 
+                li
+                  h2.no-margins 9,180
+                  small Monthly income from orders
+                  .stat-percent
+                    | 22%
+                    i.fa.fa-bolt.text-navy
+                  .progress.progress-mini
+                    .progress-bar style=("width: 22%;") 
+      .row
+        .col-lg-12
+          .ibox.float-e-margins
+            .ibox-title
+              h5 Transactions worldwide
+              .ibox-tools
+                a.collapse-link
+                  i.fa.fa-chevron-up
+                a.close-link
+                  i.fa.fa-times
+            .ibox-content
+              .row
+                .col-lg-6
+                  table.table.table-hover.margin.bottom
+                    thead
+                      tr
+                        th.text-center style=("width: 1%")  No.
+                        th Transaction
+                        th.text-center Date
+                        th.text-center Amount
+                    tbody
+                      tr
+                        td.text-center 1
+                        td
+                          | Security doors
+                        td.text-center.small 16 Jun 2014
+                        td.text-center
+                          span.label.label-primary $483.00
+                      tr
+                        td.text-center 2
+                        td
+                          | Wardrobes
+                        td.text-center.small 10 Jun 2014
+                        td.text-center
+                          span.label.label-primary $327.00
+                      tr
+                        td.text-center 3
+                        td
+                          | Set of tools
+                        td.text-center.small 12 Jun 2014
+                        td.text-center
+                          span.label.label-warning $125.00
+                      tr
+                        td.text-center 4
+                        td Panoramic pictures
+                        td.text-center.small 22 Jun 2013
+                        td.text-center
+                          span.label.label-primary $344.00
+                      tr
+                        td.text-center 5
+                        td Phones
+                        td.text-center.small 24 Jun 2013
+                        td.text-center
+                          span.label.label-primary $235.00
+                      tr
+                        td.text-center 6
+                        td Monitors
+                        td.text-center.small 26 Jun 2013
+                        td.text-center
+                          span.label.label-primary $100.00
+                .col-lg-6
+                  #world-map style=("height: 300px;")
+= javascript_include_tag 'dashboard'
