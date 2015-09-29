@@ -8,3 +8,4 @@ asset "angular-bootstrap"
 asset "metisMenu"
 asset "fontawesome"
 asset "slimScroll"
+asset 'angular-resource'
