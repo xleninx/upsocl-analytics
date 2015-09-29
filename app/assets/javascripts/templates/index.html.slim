@@ -1,0 +1,35 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-sm-4
+    h2 Lista de Campa&ntilde;as
+    ol.breadcrumb
+      li
+        a href="/"  Inicio
+      li.active
+        strong Lista de Campa&ntilde;as
+.row
+  .col-lg-12
+    .wrapper.wrapper-content.animated.fadeInUp
+      .ibox
+        .ibox-title
+          h5 Todas las compa&ntilde;as asignadas a esta cuenta
+        .ibox-content
+          .proyect-list
+            table.table.table-hover
+              tbody
+                tr ng-repeat="campaign in data.campaigns"
+                  td.project-status
+                    span.label.label-primary Active
+                  td.project-title
+                    span 
+                      | {{ campaign.name }}
+                    br/
+                    small 
+                      | {{ campaign.created_at }}
+                  td.project-completion
+                    small Completada con: 48%
+                    .progress.progress-mini
+                      .progress-bar style=("width: 48%;") 
+                  td.project-actions
+                    a.btn.btn-white.btn-sm href="#" 
+                      i.fa.fa-eye
+                      |  Ver
