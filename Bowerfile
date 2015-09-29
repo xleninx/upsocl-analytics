@@ -1,0 +1,10 @@
+asset "jquery"
+asset "angular"
+asset 'angular-route'
+asset "angular-ui-router"
+asset "bootstrap"
+asset "jquery-ui"
+asset "angular-bootstrap"
+asset "metisMenu"
+asset "fontawesome"
+asset "slimScroll"

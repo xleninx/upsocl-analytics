@@ -1,13 +1,13 @@
 doctype html
-html
+html ng-app="upsocl"
   head
     meta charset="utf-8"
     meta content="width=device-width, initial-scale=1.0" name="viewport"
     title Upsocl Analytics
     /! Main css styles
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'application', media: 'all'
     /! Main javascript files
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application'
     = csrf_meta_tags
   body
     /! Wrapper
@@ -19,7 +19,8 @@ html
         /! Page wrapper
         = render 'layouts/topnavbar'
         /! Main view
-        = yield
+        .angular-container ng-view=''
+          = yield
         /! Footer
         = render 'layouts/footer'
       /! End page wrapper
