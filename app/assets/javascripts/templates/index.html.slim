@@ -16,7 +16,7 @@
           .proyect-list
             table.table.table-hover
               tbody
-                tr ng-repeat="campaign in data.campaigns"
+                tr ng-repeat="campaign in campaigns"
                   td.project-status
                     span.label.label-primary Active
                   td.project-title
@@ -30,6 +30,6 @@
                     .progress.progress-mini
                       .progress-bar style=("width: 48%;") 
                   td.project-actions
-                    a.btn.btn-white.btn-sm href="#" 
+                    a.btn.btn-white.btn-sm href="#" ui-sref="viewCampaign({id:campaign.id})"
                       i.fa.fa-eye
                       |  Ver
