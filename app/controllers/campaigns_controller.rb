@@ -8,4 +8,12 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def show
+    @campaign = current_user.campaigns.find(params[:id]).decorate
+    respond_to do |format|
+      format.html {}
+      format.json { render :json => @campaign.as_json(include: :urls) }
+    end
+  end
+
 end
