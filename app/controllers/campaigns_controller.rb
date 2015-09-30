@@ -4,7 +4,7 @@ class CampaignsController < ApplicationController
     @campaigns = current_user.campaigns.decorate
     respond_to do |format|
       format.html {}
-      format.json { render :json => @campaigns.as_json }
+      format.json { render :json => @campaigns.as_json(methods: :num_urls, include: [:urls, users: { only: [:name] } ] ) }
     end
   end
 
@@ -12,7 +12,7 @@ class CampaignsController < ApplicationController
     @campaign = current_user.campaigns.find(params[:id]).decorate
     respond_to do |format|
       format.html {}
-      format.json { render :json => @campaign.as_json(include: :urls) }
+      format.json { render :json => @campaign.as_json }
     end
   end
 
