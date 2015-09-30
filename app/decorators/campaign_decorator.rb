@@ -5,7 +5,7 @@ class CampaignDecorator < Draper::Decorator
   # `helpers` (aka `h`). You can override attributes, for example:
   #
   def created_at
-    object.created_at.strftime("%c")
+    I18n.l(object.created_at, format: :short)
   end
 
 end
