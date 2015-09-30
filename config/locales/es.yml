@@ -1,5 +1,18 @@
 ---
 es:
+  date:
+    abbr_day_names: [ Dom, Lun, Mar, Mié, Jue, Vie, Sab ]
+    abbr_month_names: [ ~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic ]
+    day_names: [ Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sábado ]
+    formats:
+      default: "%d/%m/%Y"
+      long: "%d de %B de %Y"
+      short: "%d de %b"
+    month_names: [ ~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre ]
+    order:
+    - :day
+    - :month
+    - :year
   activerecord:
     models:
       user:
@@ -24,61 +37,6 @@ es:
       campaign:
         name: Nombre
         users: Usuarios
-
-
-  date:
-    abbr_day_names:
-    - dom
-    - lun
-    - mar
-    - mié
-    - jue
-    - vie
-    - sáb
-    abbr_month_names:
-    -
-    - ene
-    - feb
-    - mar
-    - abr
-    - may
-    - jun
-    - jul
-    - ago
-    - sep
-    - oct
-    - nov
-    - dic
-    day_names:
-    - domingo
-    - lunes
-    - martes
-    - miércoles
-    - jueves
-    - viernes
-    - sábado
-    formats:
-      default: "%d/%m/%Y"
-      long: "%d de %B de %Y"
-      short: "%d de %b"
-    month_names:
-    -
-    - enero
-    - febrero
-    - marzo
-    - abril
-    - mayo
-    - junio
-    - julio
-    - agosto
-    - septiembre
-    - octubre
-    - noviembre
-    - diciembre
-    order:
-    - :day
-    - :month
-    - :year
   datetime:
     distance_in_words:
       about_x_hours:
@@ -220,7 +178,7 @@ es:
     formats:
       default: "%A, %d de %B de %Y %H:%M:%S %z"
       long: "%d de %B de %Y %H:%M"
-      short: "%d de %b %H:%M"
+      short: "%a %d de %b de %Y"
     pm: pm
   active_admin:
     dashboard: Inicio
