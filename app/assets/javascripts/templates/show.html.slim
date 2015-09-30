@@ -1,7 +1,6 @@
-  
 .row.wrapper.border-bottom.white-bg.page-heading
   .col-sm-4
-    h2 Campa&ntilde;a: {{ campaign.name }} 
+    h2 Campa&ntilde;a: {{ url.campaign.name }} 
     ol.breadcrumb
       li
         a href="/"  Inicio
@@ -9,7 +8,7 @@
         a href='/' ui-sref="campaigns" Campa&ntilde;as
       li.active
         strong 
-          | {{ campaign.name }}
+          | {{ url.campaign.name }}
 
 .wrapper.wrapper-content
   .row
@@ -19,7 +18,8 @@
           span.label.label-success.pull-right Facebook
           h5 Total
         .ibox-content
-          h1.no-margins 40 886,200
+          h1.no-margins 
+            | {{ url.social_count.facebook }}
           small Veces Compartido
     .col-lg-3
       .ibox.float-e-margins.text-center
@@ -27,7 +27,8 @@
           span.label.label-info.pull-right Twitter
           h5 Total
         .ibox-content
-          h1.no-margins 275,800
+          h1.no-margins 
+            | {{ url.social_count.twitter }}
           small Veces Compartido
     .col-lg-3
       .ibox.float-e-margins.text-center
