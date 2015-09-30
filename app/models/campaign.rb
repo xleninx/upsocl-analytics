@@ -10,4 +10,8 @@ class Campaign < ActiveRecord::Base
     users.map(&:name).join(', ')
   end
 
+  def num_urls
+    urls.count
+  end
+
 end
