@@ -6,30 +6,34 @@
         a href="/"  Inicio
       li.active
         strong Lista de Campa&ntilde;as
-.row
-  .col-lg-12
-    .wrapper.wrapper-content.animated.fadeInUp
-      .ibox
-        .ibox-title
-          h5 Todas las compa&ntilde;as asignadas a esta cuenta
-        .ibox-content
-          .proyect-list
-            table.table.table-hover
-              tbody
-                tr ng-repeat="campaign in campaigns"
-                  td.project-status
-                    span.label.label-primary Active
-                  td.project-title
-                    span 
-                      | {{ campaign.name }}
-                    br/
-                    small 
-                      | {{ campaign.created_at }}
-                  td.project-completion
-                    small Completada con: 48%
-                    .progress.progress-mini
-                      .progress-bar style=("width: 48%;") 
-                  td.project-actions
-                    a.btn.btn-white.btn-sm href="#" ui-sref="viewCampaign({id:campaign.id})"
-                      i.fa.fa-eye
-                      |  Ver
+        
+.wrapper.wrapper-content.animated.fadeInRight
+  .ibox-content.m-b-sm.border-bottom
+    .text-center.p-lg
+      h2 LISTA DE CAMAPA&Ntilde;AS 
+  .faq-item ng-repeat="campaign in campaigns"
+    .row
+      .col-md-7
+        a.faq-question data-toggle="collapse" href="#camp{{campaign.id}}" 
+          | {{ campaign.name }}
+        small
+          i.fa.fa-clock-o
+          |  Creada el {{ campaign.created_at }}
+      .col-md-3
+        span.small.font-bold Usuarios en esta Camapa&ntilde;a
+        .tag-list ng-repeat="user in campaign.users"
+          span.tag-item 
+            | {{ user.name }}
+      .col-md-2.text-right
+        span.small.font-bold # de URLS
+        br/
+        | {{ campaign.num_urls }}
+    .row
+      .col-lg-12
+        .panel-collapse.collapse id="camp{{campaign.id}}" 
+          .list-group
+            span.list-group-item ng-repeat="url in campaign.urls"
+              button.btn.btn-outline.btn-info ui-sref='viewCampaignUrl({ id: url.id })'
+                i.fa.fa-eye  Ver Camapa&ntilde;a
+              a href="{{ url.data }}" target='_blank' 
+                |   {{ url.title }}
