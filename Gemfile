@@ -18,6 +18,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'draper', '~> 1.3'
 
+gem 'mechanize'
+
 # Angular templates
 gem 'angular-rails-templates'
 
