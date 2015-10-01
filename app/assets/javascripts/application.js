@@ -19,6 +19,7 @@
 //= require angular-ui-router/release/angular-ui-router
 //= require angular-resource/angular-resource
 //= require angular-bootstrap/ui-bootstrap
+//= require nganalytics/src/ng-analytics
 //= require angular-rails-templates
 //= require_tree ./templates
 //= require_tree ./services

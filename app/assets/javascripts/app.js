@@ -6,7 +6,8 @@ app = angular.module('upsocl',[
   'ngResource',
   'upsocl.controllers',
   'upsocl.services',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngAnalytics'
 ])
 
 angular.module('upsocl').config(function($stateProvider) {
