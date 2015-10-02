@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery/jquery-2.1.1
+//= require jquery_ujs
 //= require bootstrap-sprockets
 //= require metisMenu/jquery.metisMenu
 //= require pace/pace.min
@@ -25,6 +26,8 @@
 //= require_tree ./services
 //= require_tree ./controllers
 //= require app
+//= require auth_analytics
+
 
 
 //= require flot/jquery.flot.js
