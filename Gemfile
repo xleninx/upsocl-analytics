@@ -16,9 +16,17 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# Decorators gem
 gem 'draper', '~> 1.3'
 
+# Analize other page data
 gem 'mechanize'
+
+# Credential google auth
+gem 'google-oauth2-installed'
+
+# Conect with google apis
+gem 'legato'
 
 # Angular templates
 gem 'angular-rails-templates'
@@ -57,7 +65,6 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
