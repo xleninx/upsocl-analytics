@@ -13,4 +13,8 @@ class Url < ActiveRecord::Base
     agent.get(data)
     self.title = agent.page.title
   end
+
+  def only_path
+    URI.parse(data).path
+  end
 end
