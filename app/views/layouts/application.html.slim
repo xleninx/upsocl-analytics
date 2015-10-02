@@ -8,12 +8,11 @@ html ng-app="upsocl"
     = stylesheet_link_tag    'application', media: 'all'
     /! Main javascript files
     = javascript_include_tag 'application'
+    
     = csrf_meta_tags
-  body
+  body.top-navigation
     /! Wrapper
     #wrapper
-      /! Navigation
-      = render 'layouts/navigation'
       /! Page wraper
       #page-wrapper.gray-bg
         /! Page wrapper
