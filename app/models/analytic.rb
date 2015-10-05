@@ -4,8 +4,12 @@ class Analytic
     @profile = @user.profiles.first
   end
 
-  def data_for(url:'')
-    Page.path(url, @profile)
+  def page_data_for(url:'')
+    Page.path(url, @profile).each {|d| p d}
+  end
+
+  def country_data_for(url:'')
+    Country.path(url, @profile).each {|d| p d}
   end
 
   def test
