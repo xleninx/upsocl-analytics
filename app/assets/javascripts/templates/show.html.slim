@@ -10,6 +10,7 @@
         strong 
           | {{ url.campaign.name }}
 
+div#url_id data="{{ url.id }}"
 .wrapper.wrapper-content
   .row
     .col-lg-3
@@ -17,6 +18,7 @@
         .ibox-title
           span.label.label-success.pull-right Facebook
           h5 Total
+        
         .ibox-content
           h1.no-margins 
             | {{ url.social_count.facebook }}
@@ -94,7 +96,7 @@
         .col-lg-12
           .ibox.float-e-margins
             .ibox-title
-              h5 Transactions worldwide
+              h5 Visitas por pais
               .ibox-tools
                 a.collapse-link
                   i.fa.fa-chevron-up
@@ -106,50 +108,12 @@
                   table.table.table-hover.margin.bottom
                     thead
                       tr
-                        th.text-center style=("width: 1%")  No.
-                        th Transaction
-                        th.text-center Date
-                        th.text-center Amount
-                    tbody
-                      tr
-                        td.text-center 1
-                        td
-                          | Security doors
-                        td.text-center.small 16 Jun 2014
-                        td.text-center
-                          span.label.label-primary $483.00
-                      tr
-                        td.text-center 2
-                        td
-                          | Wardrobes
-                        td.text-center.small 10 Jun 2014
-                        td.text-center
-                          span.label.label-primary $327.00
-                      tr
-                        td.text-center 3
-                        td
-                          | Set of tools
-                        td.text-center.small 12 Jun 2014
-                        td.text-center
-                          span.label.label-warning $125.00
-                      tr
-                        td.text-center 4
-                        td Panoramic pictures
-                        td.text-center.small 22 Jun 2013
-                        td.text-center
-                          span.label.label-primary $344.00
-                      tr
-                        td.text-center 5
-                        td Phones
-                        td.text-center.small 24 Jun 2013
-                        td.text-center
-                          span.label.label-primary $235.00
-                      tr
-                        td.text-center 6
-                        td Monitors
-                        td.text-center.small 26 Jun 2013
-                        td.text-center
-                          span.label.label-primary $100.00
+                        th Pais
+                        th.text-center Visitas
+                    tbody.table-country
+                    
                 .col-lg-6
                   #world-map style=("height: 300px;")
+
+= javascript_include_tag 'graphics'                  
 = javascript_include_tag 'dashboard'
