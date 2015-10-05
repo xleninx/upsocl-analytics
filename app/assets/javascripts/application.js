@@ -26,8 +26,6 @@
 //= require_tree ./services
 //= require_tree ./controllers
 //= require app
-//= require auth_analytics
-
 
 
 //= require flot/jquery.flot.js
