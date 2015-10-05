@@ -17,6 +17,11 @@ Rails.application.routes.draw do
 
   resources :campaigns, only: [:index, :show]
   resources :urls, only: [:show]
+  resources :analytics do
+    collection do
+      get '/country/:id', to: 'analytics#country_data'      
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
