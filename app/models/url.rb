@@ -8,6 +8,10 @@ class Url < ActiveRecord::Base
     SocialShares.selected data, %w(facebook google twitter)
   end
 
+  def analytics_data
+    Analytic.new.data_for(source: 'Page', url: only_path).first
+  end
+
   def set_title
     agent = Mechanize.new
     agent.get(data)
