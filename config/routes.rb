@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :urls, only: [:show]
   resources :analytics do
     collection do
-      get '/country/:id', to: 'analytics#country_data'      
+      get '/graphs/:id', to: 'analytics#graphs'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
