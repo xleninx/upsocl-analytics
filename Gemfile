@@ -44,7 +44,7 @@ gem "bower-rails", "~> 0.10.0"
 gem 'validate_url'
 
 #Social analytics
-gem 'social_shares'
+gem 'social_shares', :git => "git@github.com:xleninx/social_shares.git"
 
 #Take screen to page
 gem 'imgkit'
