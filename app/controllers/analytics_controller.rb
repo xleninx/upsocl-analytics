@@ -3,16 +3,18 @@ class AnalyticsController < ApplicationController
   before_action :find_url
 
   def show
-    data = Analytic.new.page_data_for(url: @url.only_path)
+    data = Analytic.new.page_data_for( url: @url.only_path )
     respond_to do |format|
       format.json { render :json => data.as_json }
     end
   end
 
-  def country_data
-    data = Analytic.new.country_data_for(url: @url.only_path)
+  def graphs
+    analytics = Analytic.new
+    data = analytics.group_data_for( sources:['Country', 'Device', 'Traffic'], url: @url.only_path )
+    data['Historical'] = analytics.historical_data_for( @url.only_path )
     respond_to do |format|
-      format.json { render :json => data.as_json }
+      format.json { render :json => data }
     end
   end
 
