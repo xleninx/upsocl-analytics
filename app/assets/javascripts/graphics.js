@@ -42,7 +42,7 @@ function make_map_graphic(info){
 
 function make_pie_charts(info, legend_id, canvas_id, label){
   var ctx = document.getElementById(canvas_id).getContext("2d");
-  var colors = ["#a3e1d4", "#dedede","#b5b8cf","#CFB5B5","#C0CFB5","#E1E2C8"];
+  var colors = ["#ed5565", "#1c84c6","#1ab394","#23c6c8","#f8ac59","#9E9E9E"];
 
   var arr = [];
 
@@ -65,7 +65,7 @@ function make_pie_charts(info, legend_id, canvas_id, label){
      animateRotate: true,
      animateScale: false,
      responsive: true,
-     legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend list-group\"><% for (var i=0; i<segments.length; i++){%><li class=\"list-group-item \"><span class=\"badge \" style=\"color:black;background-color:<%=segments[i].fillColor%>\"><%= toPercent(total, segments[i].value).toFixed(2) %>%</span><%if(segments[i].label){%><%=segments[i].label.capitalize()%><%}%></li><%}%></ul>"
+     legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend list-group\"><% for (var i=0; i<segments.length; i++){%><li class=\"list-group-item \"><span class=\"badge \" style=\"color:white;background-color:<%=segments[i].fillColor%>\"><%= toPercent(total, segments[i].value).toFixed(2) %>%</span><%if(segments[i].label){%><%=segments[i].label.capitalize()%><%}%></li><%}%></ul>"
 
   });
   var legend = myPieChart.generateLegend();
