@@ -28,6 +28,7 @@
 //= require_tree ./services
 //= require_tree ./controllers
 //= require app
+//= require helper_functions
 
 
 //= require flot/jquery.flot.js

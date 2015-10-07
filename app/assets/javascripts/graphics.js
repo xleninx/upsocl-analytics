@@ -1,9 +1,3 @@
-var myPieChart;
-String.prototype.capitalize = function() {
-    return this.charAt(0).toUpperCase() + this.slice(1);
-}
-
-
 function show_country(url_id){
 
   $.get('/analytics/graphs/'+url_id, function(info){
@@ -60,7 +54,8 @@ function make_pie_charts(info, legend_id, canvas_id, label){
       label: i[label]
     });
   });
-
+  var total = totalize(info, 'pageviews');
+  console.log()
   var myPieChart = new Chart(ctx).Pie(arr, {
      segmentShowStroke: true,
      segmentStrokeColor: "#fff",
@@ -70,7 +65,7 @@ function make_pie_charts(info, legend_id, canvas_id, label){
      animateRotate: true,
      animateScale: false,
      responsive: true,
-     legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend list-group\"><% for (var i=0; i<segments.length; i++){%><li class=\"list-group-item \"><span class=\"badge \" style=\"background-color:<%=segments[i].fillColor%>\"><%=segments[i].value%></span><%if(segments[i].label){%><%=segments[i].label.capitalize()%><%}%></li><%}%></ul>"
+     legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend list-group\"><% for (var i=0; i<segments.length; i++){%><li class=\"list-group-item \"><span class=\"badge \" style=\"color:black;background-color:<%=segments[i].fillColor%>\"><%= toPercent(total, segments[i].value).toFixed(2) %>%</span><%if(segments[i].label){%><%=segments[i].label.capitalize()%><%}%></li><%}%></ul>"
 
   });
   var legend = myPieChart.generateLegend();
@@ -89,20 +84,8 @@ function make_bars_chart(data){
     arr_avgtimeonpage.push([moment(i.date, 'YYYYMMDD').toDate(), parseInt(i.avgtimeonpage) / 60])
   });
 
-  var sum = 0;
-  $.each(arr_visitors, function(index, item){
-    sum += item[1];
-  });
-
-  $('#total-visits').html(sum);
-
-  var sum = 0;
-  $.each(arr_avgtimeonpage, function(index, item){
-    sum += item[1];
-    console.log(item[1]);
-  });
-
-  $('#total-time').html((sum / arr_avgtimeonpage.length).toFixed() + ' Min');
+  $('#total-visits').html(totalize(arr_visitors, 1));
+  $('#total-time').html((totalize(arr_avgtimeonpage, 1) / arr_avgtimeonpage.length).toFixed() + ' Min');
 
   var dataset = [
       {
