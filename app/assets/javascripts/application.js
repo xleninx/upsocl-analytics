@@ -13,8 +13,10 @@
 //= require jquery/jquery-2.1.1
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require moment
 //= require metisMenu/jquery.metisMenu
 //= require pace/pace.min
+//= require underscore
 //= require slimscroll/jquery.slimscroll.min
 //= require angular
 //= require angular-ui-router/release/angular-ui-router
