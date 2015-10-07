@@ -1,3 +1,4 @@
+
 function show_country(url_id){
 
   $.get('/analytics/graphs/'+url_id, function(info){
@@ -73,6 +74,11 @@ function make_pie_charts(info, legend_id, canvas_id, label){
 
 }
 
+function set_process_data(hash, html_id){
+  $(html_id).find('.stat-percent').html(hash.percent+'% <i class="'+hash.html_class+'">');
+  $(html_id).find('.progress-bar').removeClass().addClass(hash.progress_class).width(hash.percent+'%');
+}
+
 function make_bars_chart(data){
   var arr_visitors = [];
   var arr_avgtimeonpage = [];
@@ -87,6 +93,8 @@ function make_bars_chart(data){
   $('#total-visits').html(totalize(arr_visitors, 1));
   $('#total-time').html((totalize(arr_avgtimeonpage, 1) / arr_avgtimeonpage.length).toFixed() + ' Min');
 
+  set_process_data(progress_percent(arr_visitors, 1), '#visits-percent');
+  set_process_data(progress_percent(arr_avgtimeonpage, 1), '#time-percent');
   var dataset = [
       {
           label: "Paginas Vistas",

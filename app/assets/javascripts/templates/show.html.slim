@@ -89,7 +89,7 @@ div#url_id data="{{ url.id }}"
                 #flot-dashboard-chart.flot-chart-content
             .col-lg-3
               ul.stat-list
-                li
+                li#visits-percent
                   h2.no-margins#total-visits 
                   small Total de visitas
                   .stat-percent
@@ -97,7 +97,7 @@ div#url_id data="{{ url.id }}"
                     i.fa.fa-level-up.text-navy
                   .progress.progress-mini
                     .progress-bar style=("width: 48%;") 
-                li
+                li#time-percent
                   h2.no-margins#total-time
                   small Tiempo promedio (Min)
                   .stat-percent
