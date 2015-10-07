@@ -33,7 +33,11 @@
         .panel-collapse.collapse id="camp{{campaign.id}}" 
           .list-group
             span.list-group-item ng-repeat="url in campaign.urls"
-              button.btn.btn-outline.btn-info ui-sref='viewCampaignUrl({ id: url.id })'
-                i.fa.fa-eye  Ver Camapa&ntilde;a
-              a href="{{ url.data }}" target='_blank' 
-                |   {{ url.title }}
+              .col-lg-2
+                button.btn.btn-outline.btn-info ui-sref='viewCampaignUrl({ id: url.id })'
+                  i.fa.fa-eye  Ver Camapa&ntilde;a
+              .col-lg-10
+                a href="{{ url.data }}" target='_blank' 
+                  | {{ url.title }}
+              .clearfix    
+              
