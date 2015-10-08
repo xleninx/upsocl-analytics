@@ -48,6 +48,7 @@ gem 'social_shares', :git => "git@github.com:xleninx/social_shares.git"
 
 #Take screen to page
 gem 'screencap'
+gem 'rmagick'
 
 # ActiveAdmin
 gem 'activeadmin', '~> 1.0.0.pre1'

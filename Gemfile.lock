@@ -305,6 +305,7 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     retriable (1.4.1)
+    rmagick (2.15.4)
     rspec-core (3.3.2)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.1)
@@ -422,6 +423,7 @@ DEPENDENCIES
   pry-rails
   rails (= 4.2.4)
   rails_12factor (= 0.0.3)
+  rmagick
   rspec-rails
   sass-rails (~> 5.0)
   screencap
