@@ -17,43 +17,60 @@ div#url_id data="{{ url.id }}"
       h2 
         | {{ url.title }}
   .row
-    .col-lg-3
+    .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
         .ibox-title
           span.label.label-success.pull-right Facebook
-          h5 Total
-        
+          h5 Shares
         .ibox-content
           h1.no-margins 
-            | {{ url.social_count.facebook }}
+            | {{ url.social_count.facebook.share_count }}
           small Veces Compartido
-    .col-lg-3
+    .col-lg-4.col-md-4.col-sm-6
+      .ibox.float-e-margins.text-center
+        .ibox-title
+          span.label.label-success.pull-right Facebook
+          h5 Likes    
+        .ibox-content
+          h1.no-margins 
+            | {{ url.social_count.facebook.like_count }}
+          small Me gusta!  
+    .col-lg-4.col-md-4.col-sm-6
+      .ibox.float-e-margins.text-center
+        .ibox-title
+          span.label.label-success.pull-right Facebook
+          h5 Comments
+        .ibox-content
+          h1.no-margins 
+            | {{ url.social_count.facebook.comment_count }}
+          small Veces Comentado
+    .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
         .ibox-title
           span.label.label-info.pull-right Twitter
-          h5 Total
+          h5 Shares
         .ibox-content
           h1.no-margins 
             | {{ url.social_count.twitter }}
           small Veces Compartido
-    .col-lg-3
+    .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
         .ibox-title
           span.label.label-primary.pull-right Google Analytics
           h5 Visitas
         .ibox-content
           h1.no-margins 
-            | {{ url.analytics_data.table.visitors }}
+            | {{ url.analytics_data.table.pageviews }}
           small Visitas
-    .col-lg-3
+    .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
         .ibox-title
           span.label.label-danger.pull-right Google Analytics
-          h5 Tiempo en Pagina
+          h5 Tiempo Promedio
         .ibox-content
           h1.no-margins
             | {{ url.analytics_data.table.avgtimeonpage | number: 2 }}
-          small Tiempo promedio en la pagina (Seg)
+          small Tiempo promedio (Seg)
   .row
     .col-lg-6
       .ibox.float-e-margins
