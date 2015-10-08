@@ -80,25 +80,25 @@ function set_process_data(hash, html_id){
 }
 
 function make_bars_chart(data){
-  var arr_visitors = [];
+  var arr_pageviews = [];
   var arr_avgtimeonpage = [];
   var i;
 
   $.each(data, function(index, item){
     var i = item.table
-    arr_visitors.push([moment(i.date, 'YYYYMMDD').toDate(), parseInt(i.visitors)])
+    arr_pageviews.push([moment(i.date, 'YYYYMMDD').toDate(), parseInt(i.pageviews)])
     arr_avgtimeonpage.push([moment(i.date, 'YYYYMMDD').toDate(), parseInt(i.avgtimeonpage) / 60])
   });
 
-  $('#total-visits').html(totalize(arr_visitors, 1));
+  $('#total-visits').html(totalize(arr_pageviews, 1));
   $('#total-time').html((totalize(arr_avgtimeonpage, 1) / arr_avgtimeonpage.length).toFixed() + ' Min');
 
-  set_process_data(progress_percent(arr_visitors, 1), '#visits-percent');
+  set_process_data(progress_percent(arr_pageviews, 1), '#visits-percent');
   set_process_data(progress_percent(arr_avgtimeonpage, 1), '#time-percent');
   var dataset = [
       {
           label: "Paginas Vistas",
-          data: arr_visitors,
+          data: arr_pageviews,
           color: "#1ab394",
           bars: {
               show: true,
