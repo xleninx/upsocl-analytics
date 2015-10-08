@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:xleninx/social_shares.git
+  remote: git://github.com/xleninx/social_shares.git
   revision: 69636cb22dc4a9e09aecdb2f9bb33a2b7017fb78
   specs:
     social_shares (0.2.6)
