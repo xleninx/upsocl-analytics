@@ -47,8 +47,7 @@ gem 'validate_url'
 gem 'social_shares', :git => "git@github.com:xleninx/social_shares.git"
 
 #Take screen to page
-gem 'imgkit'
-gem 'wkhtmltoimage-binary'
+gem 'screencap'
 
 # ActiveAdmin
 gem 'activeadmin', '~> 1.0.0.pre1'
