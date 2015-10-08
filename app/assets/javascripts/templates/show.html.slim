@@ -16,7 +16,18 @@ div#url_id data="{{ url.id }}"
     .text-center.p-lg
       h2 
         | {{ url.title }}
+    .screenshot
+      img.center-block src="/screenshot/{{ url.id }}.png"
   .row
+    .col-lg-12
+      .ibox.float-e-margins.text-center
+        .ibox-title
+          span.label.label-primary.pull-right Google Analytics
+          h5 Visitas
+        .ibox-content
+          h1.no-margins 
+            | {{ url.analytics_data.table.pageviews }}
+          small Visitas
     .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
         .ibox-title
@@ -56,12 +67,12 @@ div#url_id data="{{ url.id }}"
     .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
         .ibox-title
-          span.label.label-primary.pull-right Google Analytics
-          h5 Visitas
+          span.label.label-warning.pull-right Google Analytcis
+          h5 Usuarios
         .ibox-content
           h1.no-margins 
-            | {{ url.analytics_data.table.pageviews }}
-          small Visitas
+            | {{ url.analytics_data.table.users }}
+          small Usuarios Unicos
     .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
         .ibox-title
