@@ -16,6 +16,9 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# gem for get dfp info
+gem 'google-dfp-api'
+
 # manage data in js
 gem 'underscore-rails'
 
@@ -52,9 +55,6 @@ gem 'rmagick'
 
 # ActiveAdmin
 gem 'activeadmin', '~> 1.0.0.pre1'
-
-# Google analytics gem
-gem 'google-api-client'
 
 # Slim html
 gem 'slim'
