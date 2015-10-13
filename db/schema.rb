@@ -85,8 +85,8 @@ ActiveRecord::Schema.define(version: 20151013182210) do
   create_table "dfp_stadistics", force: :cascade do |t|
     t.integer  "url_id"
     t.date     "date"
-    t.string   "item_name"
-    t.integer  "item_id"
+    t.string   "line_name"
+    t.integer  "line_id"
     t.integer  "impressions"
     t.integer  "clicks"
     t.float    "ctr"
