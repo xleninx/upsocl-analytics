@@ -3,6 +3,7 @@ class CreateCountryStadistics < ActiveRecord::Migration
     create_table :country_stadistics do |t|
       t.belongs_to :url
       t.date :date
+      t.string :country_name
       t.string :country_code
       t.integer :pageviews
       t.timestamps null: false
