@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150930183424) do
+ActiveRecord::Schema.define(version: 20151013182210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,52 @@ ActiveRecord::Schema.define(version: 20150930183424) do
 
   add_index "campaigns_users", ["campaign_id"], name: "index_campaigns_users_on_campaign_id", using: :btree
   add_index "campaigns_users", ["user_id"], name: "index_campaigns_users_on_user_id", using: :btree
+
+  create_table "country_stadistics", force: :cascade do |t|
+    t.integer  "url_id"
+    t.string   "country_code"
+    t.integer  "pageviews"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "device_stadistics", force: :cascade do |t|
+    t.integer  "url_id"
+    t.string   "device_type"
+    t.integer  "pageviews"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "dfp_stadistics", force: :cascade do |t|
+    t.integer  "url_id"
+    t.date     "date"
+    t.string   "item_name"
+    t.integer  "item_id"
+    t.integer  "impressions"
+    t.integer  "clicks"
+    t.float    "ctr"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "page_stadistics", force: :cascade do |t|
+    t.integer  "url_id"
+    t.date     "date"
+    t.float    "avgtimeonpage"
+    t.integer  "pageviews"
+    t.integer  "sessions"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "traffic_stadistics", force: :cascade do |t|
+    t.integer  "url_id"
+    t.string   "traffic_type"
+    t.integer  "pageviews"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "urls", force: :cascade do |t|
     t.string   "data"
