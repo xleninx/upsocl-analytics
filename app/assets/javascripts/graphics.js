@@ -56,7 +56,7 @@ function make_pie_charts(info, legend_id, canvas_id, label){
     });
   });
   var total = totalize(info, 'pageviews');
-  console.log()
+
   var myPieChart = new Chart(ctx).Pie(arr, {
      segmentShowStroke: true,
      segmentStrokeColor: "#fff",
