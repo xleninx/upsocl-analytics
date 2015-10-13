@@ -3,8 +3,8 @@ class CreateDfpStadistics < ActiveRecord::Migration
     create_table :dfp_stadistics do |t|
       t.belongs_to :url
       t.date :date
-      t.string :item_name
-      t.integer :item_id
+      t.string :line_name
+      t.integer :line_id
       t.integer :impressions
       t.integer :clicks
       t.float :ctr
