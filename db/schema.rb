@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20151013182210) do
   create_table "country_stadistics", force: :cascade do |t|
     t.integer  "url_id"
     t.date     "date"
+    t.string   "country_name"
     t.string   "country_code"
     t.integer  "pageviews"
     t.datetime "created_at",   null: false
