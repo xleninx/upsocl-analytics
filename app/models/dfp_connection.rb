@@ -1,4 +1,4 @@
-class Dfp
+class DfpConnection
   require 'dfp_api_statement'
   require 'dfp_api'
   require 'open-uri'
@@ -32,9 +32,9 @@ class Dfp
     @dfp
   end
 
-  def run_delivery_report()
+  def run_report()
     # Get DfpApi instance and load configuration from ~/dfp_api.yml.
-    dfp = DfpApi::Api.new
+    dfp = @dfp
 
     # To enable logging of SOAP requests, set the log_level value to 'DEBUG' in
     # the configuration file or provide your own logger:
@@ -44,7 +44,6 @@ class Dfp
     report_service = dfp.service(:ReportService, API_VERSION)
 
     # Specify the order ID to filter by.
-    order_id = '265518244'.to_i
 
     # Specify a report to run for the last 7 days.
     report_end_date = DateTime.now
@@ -59,19 +58,9 @@ class Dfp
       :end_date => {:year => report_end_date.year,
                     :month => report_end_date.month,
                     :day => report_end_date.day},
-      :dimensions => ['ORDER_ID', 'ORDER_NAME'],
-      :dimension_attributes => ['ORDER_TRAFFICKER', 'ORDER_START_DATE_TIME',
-          'ORDER_END_DATE_TIME'],
-      :columns => ['AD_SERVER_IMPRESSIONS', 'AD_SERVER_CLICKS', 'AD_SERVER_CTR',
-          'AD_SERVER_CPM_AND_CPC_REVENUE', 'AD_SERVER_WITHOUT_CPD_AVERAGE_ECPM'],
+      :dimensions => ['DATE', 'LINE_ITEM_NAME'],
+      :columns => ['AD_SERVER_IMPRESSIONS', 'AD_SERVER_CLICKS', 'AD_SERVER_CTR'],
       # Create statement object to filter for an order.
-      :statement => {
-          :query => 'WHERE ORDER_ID = :order_id',
-          :values => [
-              {:key => 'order_id',
-               :value => {:value => order_id, :xsi_type => 'NumberValue'}}
-          ]
-      }
     }
 
     # Create report job.
