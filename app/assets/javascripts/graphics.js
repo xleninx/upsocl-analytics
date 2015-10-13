@@ -93,8 +93,8 @@ function make_bars_chart(data){
   $('#total-visits').html(totalize(arr_pageviews, 1));
   $('#total-time').html((totalize(arr_avgtimeonpage, 1) / arr_avgtimeonpage.length).toFixed() + ' Min');
 
-  set_process_data(progress_percent(arr_pageviews, 1), '#visits-percent');
-  set_process_data(progress_percent(arr_avgtimeonpage, 1), '#time-percent');
+  set_process_data(progress_percent(arr_pageviews, 1, 'normal'), '#visits-percent');
+  set_process_data(progress_percent(arr_avgtimeonpage, 1, 'time'), '#time-percent');
   var dataset = [
       {
           label: "Paginas Vistas",

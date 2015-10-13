@@ -6,7 +6,7 @@ function toPercent(total, value){
   return (value * 100) / total
 }
 
-function progress_percent(arr, label){
+function progress_percent(arr, label, typeData){
   var today = arr[arr.length - 1][label];
   var last_day = arr[arr.length -2][label];
   var html_class;
@@ -15,11 +15,17 @@ function progress_percent(arr, label){
   if (today < last_day){
     html_class = 'text-danger fa fa-level-down';
     progress_class = 'progress-bar progress-bar-danger';
+    if (today <= 0) { today = 1; }
     var percent = ((last_day * 100) / today) - 100;
   }else{
     html_class = 'text-navy fa fa-level-up';
     progress_class = 'progress-bar';
-    var percent = ((today * 100) / last_day) - 100;
+    if (typeData == 'time'){
+      var percent = ((today - last_day) * 60) * 100;
+
+    }else {
+      var percent = (today - last_day) * 100;
+    }
   }
 
   return {percent: percent.toFixed(), html_class: html_class, progress_class: progress_class}
