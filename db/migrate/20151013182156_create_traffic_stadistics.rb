@@ -2,6 +2,7 @@ class CreateTrafficStadistics < ActiveRecord::Migration
   def change
     create_table :traffic_stadistics do |t|
       t.belongs_to :url
+      t.date :date
       t.string :traffic_type
       t.integer :pageviews
       t.timestamps null: false
