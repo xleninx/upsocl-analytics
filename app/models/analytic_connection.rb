@@ -8,8 +8,8 @@ class AnalyticConnection
     Object.const_get('Analytic::' + source).path(url, @profile).each { |d| p d }
   end
 
-  def historical_data_for( url )
-    Analytic::Historical.results( @profile, start_date: 7.days.ago, end_date: DateTime.now ).path( url ).each { |d| p d }
+  def historical_data_for( source:'', url:'', start_date: 1.week.ago , end_date: Time.now )
+    Object.const_get('Analytic::' + source).results( @profile, start_date: start_date, end_date: end_date ).path( url ).each { |d| p d }
   end
 
   def group_data_for(sources:[], url:'')
