@@ -1,5 +1,11 @@
 class Url < ActiveRecord::Base
   belongs_to :campaign
+  has_many :page_stadistics
+  has_many :dfp_stadistics
+  has_many :country_stadistics
+  has_many :device_stadistics
+  has_many :traffic_stadistics
+
   validates :data, presence: true, url: { no_local: true, message: 'el formato no es correto' }
 
   before_save :set_title, :make_screenshot
