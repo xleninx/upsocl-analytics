@@ -10,6 +10,7 @@ namespace :analytics do
       country_stadistics = AnalyticConnection.new.historical_data_for(source: 'Country', url: url.only_path, start_date: @start_date, end_date: @end_date)
       traffic_stadistics = AnalyticConnection.new.historical_data_for(source: 'Traffic', url: url.only_path, start_date: @start_date, end_date: @end_date)
       device_stadistics = AnalyticConnection.new.historical_data_for(source: 'Device', url: url.only_path, start_date: @start_date, end_date: @end_date)
+      dfp_stadistics = DfpConnection.new.run_report(start_date: @start_date, end_date: @end_date, item_id: url.line_id)
 
       page_stadistics.each do |data|
         PageStadistic.create(url: url, date: data.date.to_date, avgtimeonpage: data.avgtimeonpage.to_f, pageviews: data.pageviews.to_i, sessions: data.sessions.to_i)
@@ -27,6 +28,9 @@ namespace :analytics do
         DeviceStadistic.create(url: url, date: data.date.to_date, device_type: data.deviceCategory, pageviews: data.pageviews.to_i)
       end
 
+      dfp_stadistics.each do |data|
+        DfpStadistic.create(url: url, date: data[:date], line_id: data[:line_id], line_name: data[:line_name], impressions: data[:impressions], clicks: data[:clicks], ctr: data[:ctr])
+      end
     end
 
     puts 'Task complete...'
