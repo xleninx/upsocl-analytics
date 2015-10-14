@@ -28,49 +28,37 @@ class DfpConnection
     })
   end
 
-  def var
-    @dfp
-  end
-
-  def run_report()
-    # Get DfpApi instance and load configuration from ~/dfp_api.yml.
+  def run_report(start_date: 7.day.ago, end_date: Time.now, item_id: 0)
     dfp = @dfp
-
-    # To enable logging of SOAP requests, set the log_level value to 'DEBUG' in
-    # the configuration file or provide your own logger:
-    # dfp.logger = Logger.new('dfp_xml.log')
-
-    # Get the ReportService.
+    arr = []
+    export_format = 'CSV_DUMP'
+    file_name = 'test.csv'
     report_service = dfp.service(:ReportService, API_VERSION)
 
-    # Specify the order ID to filter by.
-
-    # Specify a report to run for the last 7 days.
-    report_end_date = DateTime.now
-    report_start_date = report_end_date - 7
-
-    # Create report query.
     report_query = {
       :date_range_type => 'CUSTOM_DATE',
-      :start_date => {:year => report_start_date.year,
-                      :month => report_start_date.month,
-                      :day => report_start_date.day},
-      :end_date => {:year => report_end_date.year,
-                    :month => report_end_date.month,
-                    :day => report_end_date.day},
-      :dimensions => ['DATE', 'LINE_ITEM_NAME'],
+      :start_date => {:year => start_date.year,
+                      :month => start_date.month,
+                      :day => start_date.day},
+      :end_date => {:year => end_date.year,
+                    :month => end_date.month,
+                    :day => end_date.day},
+      :dimensions => ['DATE', 'LINE_ITEM_NAME', 'LINE_ITEM_ID'],
       :columns => ['AD_SERVER_IMPRESSIONS', 'AD_SERVER_CLICKS', 'AD_SERVER_CTR'],
       # Create statement object to filter for an order.
+      :statement => {
+        :query => 'WHERE LINE_ITEM_ID = :item_id',
+        :values => [
+            {:key => 'item_id',
+             :value => {:value => item_id, :xsi_type => 'NumberValue'}}
+        ]
+      }
     }
 
-    # Create report job.
     report_job = {:report_query => report_query}
-
-    # Run report job.
     report_job = report_service.run_report_job(report_job);
 
     MAX_RETRIES.times do |retry_count|
-      # Get the report job status.
       report_job_status = report_service.get_report_job_status(report_job[:id])
 
       break unless report_job_status == 'IN_PROGRESS'
@@ -82,15 +70,8 @@ class DfpConnection
         [report_job[:id],
          report_service.get_report_job_status(report_job[:id])]
 
-     # Change to your preffered export format.
-     export_format = 'CSV_DUMP'
-
-     # Get the report URL.
-     download_url = report_service.get_report_download_url(
+    download_url = report_service.get_report_download_url(
         report_job[:id], export_format);
-
-    file_name = 'test.csv'
-    puts "Downloading [%s] to [%s]..." % [download_url, file_name]
 
     source = open(download_url)
     gz = Zlib::GzipReader.new(source)
@@ -100,8 +81,10 @@ class DfpConnection
     end
 
     CSV.foreach(file_name, converters: :numeric, headers: true) do |row|
-      # Additional row processing
-       puts row['Dimension.ORDER_NAME']
+      arr << {date: row['Dimension.DATE'], line_name: row['Dimension.LINE_ITEM_NAME'], line_id: row['Dimension.LINE_ITEM_ID'], impressions: row['Column.AD_SERVER_IMPRESSIONS'], clicks: row['Column.AD_SERVER_CLICKS'], ctr: row['Column.AD_SERVER_CTR']}
+      puts arr
     end
+
+    return arr
   end
 end
