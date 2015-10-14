@@ -7,7 +7,8 @@ class Url < ActiveRecord::Base
   has_many :traffic_stadistics
 
   validates :data, presence: true, url: { no_local: true, message: 'el formato no es correto' }
-
+  validates :line_id, presence: true
+  
   before_save :set_title, :make_screenshot
 
   def social_count
