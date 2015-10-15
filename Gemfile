@@ -16,6 +16,10 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# chosen
+gem 'chosen-rails'
+gem 'compass-rails', '~> 2.0.4'
+
 # gem for get dfp info
 gem 'google-dfp-api'
 
