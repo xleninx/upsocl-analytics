@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015192808) do
+ActiveRecord::Schema.define(version: 20151015204723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,14 +70,24 @@ ActiveRecord::Schema.define(version: 20151015192808) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "countries_urls", id: false, force: :cascade do |t|
+    t.integer "url_id"
+    t.integer "country_id"
+  end
+
+  add_index "countries_urls", ["country_id"], name: "index_countries_urls_on_country_id", using: :btree
+  add_index "countries_urls", ["url_id"], name: "index_countries_urls_on_url_id", using: :btree
+
   create_table "country_stadistics", force: :cascade do |t|
     t.integer  "url_id"
     t.date     "date"
     t.string   "country_name"
     t.string   "country_code"
     t.integer  "pageviews"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "users"
+    t.float    "avgtimeonpage"
   end
 
   create_table "device_stadistics", force: :cascade do |t|
