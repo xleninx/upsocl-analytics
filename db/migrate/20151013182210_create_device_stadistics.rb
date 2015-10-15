@@ -1,7 +1,7 @@
 class CreateDeviceStadistics < ActiveRecord::Migration
   def change
     create_table :device_stadistics do |t|
-      t.belongs_to :url
+      t.belongs_to :url, index: true
       t.date :date
       t.string :device_type
       t.integer :pageviews

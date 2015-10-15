@@ -1,7 +1,7 @@
 class CreatePageStadistics < ActiveRecord::Migration
   def change
     create_table :page_stadistics do |t|
-      t.belongs_to :url
+      t.belongs_to :url, index: true
       t.date :date
       t.float :avgtimeonpage
       t.integer :pageviews
