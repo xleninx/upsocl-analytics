@@ -1,7 +1,7 @@
 angular.module('upsocl.controllers', []).controller('CampaignListController', function($scope, $state, $window, Campaign) {
   $scope.campaigns = Campaign.query();
 }).controller('CampaignUrlViewController', function($scope, $stateParams, Url) {
-  $scope.date = { startDate: moment().subtract(7, "days"), endDate: moment() };
+  $scope.date = { startDate: moment().subtract(2, "year"), endDate: moment() };
   $scope.opts = run_datepicker();
   $scope.$watch('date', function(newDate) {
     var startDate = newDate.startDate.format('YYYY-MM-DD');
