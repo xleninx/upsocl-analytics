@@ -1,5 +1,5 @@
 .row.wrapper.border-bottom.white-bg.page-heading
-  .col-sm-4
+  .col-sm-8
     h2 Campa&ntilde;a: {{ url.campaign.name }} 
     ol.breadcrumb
       li
@@ -9,6 +9,9 @@
       li.active
         strong 
           | {{ url.campaign.name }}
+  .col-sm-4
+    h2.ng-binding.text-center Rango de Fechas
+    input.input-sm.form-control.text-center.date-picker date-range-picker='' options="opts" ng-model="date" type="text" placeholder='Selecciones fechas a consultar' /
 
 div#url_id data="{{ url.id }}"
 .wrapper.wrapper-content
@@ -26,8 +29,35 @@ div#url_id data="{{ url.id }}"
           h5 Visitas
         .ibox-content
           h1.no-margins 
-            | {{ url.analytics_data.table.pageviews }}
+            | {{ url.totals_stadistics.pageviews }}
           small Visitas
+    .col-lg-4.col-md-4.col-sm-6
+      .ibox.float-e-margins.text-center
+        .ibox-title
+          span.label.label-warning.pull-right DoubleClick
+          h5 Impresiones
+        .ibox-content
+          h1.no-margins 
+            | {{ url.stadistics.dfp_stadistics.impressions }}
+          small Impresiones de Anuncios
+    .col-lg-4.col-md-4.col-sm-6
+      .ibox.float-e-margins.text-center
+        .ibox-title
+          span.label.label-warning.pull-right DoubleClick
+          h5 Clicks
+        .ibox-content
+          h1.no-margins 
+            | {{ url.stadistics.dfp_stadistics.clicks }}
+          small Clicks en Anuncios
+    .col-lg-4.col-md-4.col-sm-6
+      .ibox.float-e-margins.text-center
+        .ibox-title
+          span.label.label-warning.pull-right DoubleClick
+          h5 CTR
+        .ibox-content
+          h1.no-margins 
+            | {{ url.stadistics.dfp_stadistics.ctr | number: 2 }}
+          small % de clicks en Anuncios
     .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
         .ibox-title
@@ -67,11 +97,11 @@ div#url_id data="{{ url.id }}"
     .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
         .ibox-title
-          span.label.label-warning.pull-right Google Analytcis
+          span.label.label-danger.pull-right Google Analytcis
           h5 Usuarios
         .ibox-content
           h1.no-margins 
-            | {{ url.analytics_data.table.users }}
+            | {{ url.totals_stadistics.users }}
           small Usuarios Unicos
     .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
@@ -80,8 +110,8 @@ div#url_id data="{{ url.id }}"
           h5 Tiempo Promedio
         .ibox-content
           h1.no-margins
-            | {{ url.analytics_data.table.avgtimeonpage | number: 2 }}
-          small Tiempo promedio (Seg)
+            | {{ url.totals_stadistics.avgtimeonpage }}
+          small Tiempo promedio (Min)
   .row
     .col-lg-6
       .ibox.float-e-margins
