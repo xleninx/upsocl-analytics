@@ -31,7 +31,7 @@ ActiveAdmin.register Campaign do
   form do |f|
     f.inputs "Campaña" do
       f.input :name
-      f.input :users, :as => :select, :input_html => {:multiple => true}
+      f.input :users, :as => :select, :input_html => {:multiple => true, :class => "chosen-input"}
     end
     f.inputs do
       f.has_many :urls, heading: 'Direcciones Url', allow_destroy: true, new_record: 'Añadir' do |a|
