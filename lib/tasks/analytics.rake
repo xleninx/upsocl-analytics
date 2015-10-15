@@ -17,7 +17,7 @@ namespace :analytics do
       end
 
       country_stadistics.each do |data|
-        CountryStadistic.create(url: url, date: data.date.to_date, country_code: data.countryIsoCode, country_name: data.country, pageviews: data.pageviews.to_i)
+        CountryStadistic.create(url: url, date: data.date.to_date, country_code: data.countryIsoCode, country_name: data.country, pageviews: data.pageviews.to_i, users: data.users.to_i, avgtimeonpage: data.avgtimeonpage.to_f)
       end
 
       traffic_stadistics.each do |data|
