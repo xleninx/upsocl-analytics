@@ -1,5 +1,6 @@
 class Url < ActiveRecord::Base
   belongs_to :campaign
+  has_and_belongs_to_many :countries
   has_many :page_stadistics
   has_many :dfp_stadistics
   has_many :country_stadistics
