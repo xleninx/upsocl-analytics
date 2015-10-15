@@ -1,21 +1,18 @@
 
-function show_country(url_id){
-
-  $.get('/analytics/graphs/'+url_id, function(info){
-    make_map_graphic(info.Country);
-    make_pie_charts(info.Traffic, '#traffic_legend', 'traffic_chart', 'traffictype');
-    make_pie_charts(info.Device, '#device_legend', 'device_chart', 'deviceCategory');
-    make_bars_chart(info.Historical)
-  });
-
+function draw_graphics(url_id, info){
+  make_map_graphic(info.country_stadistics);
+  make_pie_charts(info.traffic_stadistics, '#traffic_legend', 'traffic_chart', 'traffic_type');
+  make_pie_charts(info.device_stadistics, '#device_legend', 'device_chart', 'device');
+  make_bars_chart(info.page_stadistics);
 }
 
 function make_map_graphic(info){
   var data = {};
-  $.each(info, function(index, item){
-    i = item.table;
-    data[i.countryIsoCode] = i.pageviews;
-    $('.table-country').append('<tr><td>'+i.country+'</td><td class="text-center"><span class="label label-primary">'+i.pageviews+'</span></td></tr>');
+  $('#world-map>*').remove();
+  $('.table-country>*').remove();
+  $.each(info, function(index, i){
+    data[i.code] = i.pageviews;
+    $('.table-country').append('<tr><td>'+i.name+'</td><td class="text-center"><span class="label label-primary">'+i.pageviews+'</span></td></tr>');
   });
 
   $('#world-map').vectorMap({
@@ -42,13 +39,13 @@ function make_map_graphic(info){
 }
 
 function make_pie_charts(info, legend_id, canvas_id, label){
+  $(legend_id+">*").remove();
   var ctx = document.getElementById(canvas_id).getContext("2d");
-  var colors = ["#ed5565", "#1c84c6","#1ab394","#23c6c8","#f8ac59","#9E9E9E"];
+  var colors = ["#1ab394", "#1c84c6","#ed5565","#23c6c8","#f8ac59","#9E9E9E"];
 
   var arr = [];
 
-  $.each(info, function(index, item){
-    var i = item.table;
+  $.each(info, function(index, i){
     arr.push({
       value: parseInt(i.pageviews),
       color: colors[index],
@@ -60,7 +57,7 @@ function make_pie_charts(info, legend_id, canvas_id, label){
   var myPieChart = new Chart(ctx).Pie(arr, {
      segmentShowStroke: true,
      segmentStrokeColor: "#fff",
-     segmentStrokeWidth: 5 ,
+     segmentStrokeWidth: 2,
      animationSteps: 100,
      animationEasing: "easeOutBounce",
      animateRotate: true,
@@ -82,12 +79,10 @@ function set_process_data(hash, html_id){
 function make_bars_chart(data){
   var arr_pageviews = [];
   var arr_avgtimeonpage = [];
-  var i;
 
-  $.each(data, function(index, item){
-    var i = item.table
-    arr_pageviews.push([moment(i.date, 'YYYYMMDD').toDate(), parseInt(i.pageviews)])
-    arr_avgtimeonpage.push([moment(i.date, 'YYYYMMDD').toDate(), parseInt(i.avgtimeonpage) / 60])
+  $.each(data, function(index, i){
+    arr_pageviews.push([moment(i.date).toDate(), parseInt(i.pageviews)])
+    arr_avgtimeonpage.push([moment(i.date).toDate(), parseInt(i.avgtimeonpage) / 60])
   });
 
   $('#total-visits').html(totalize(arr_pageviews, 1));
