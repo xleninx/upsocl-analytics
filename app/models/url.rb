@@ -6,9 +6,11 @@ class Url < ActiveRecord::Base
   has_many :device_stadistics
   has_many :traffic_stadistics
 
+  attr_accessor :params
+
   validates :data, presence: true, url: { no_local: true, message: 'el formato no es correto' }
   validates :line_id, presence: true
-  
+
   before_save :set_title, :make_screenshot
 
   def social_count
@@ -34,4 +36,18 @@ class Url < ActiveRecord::Base
   def only_path
     URI.parse(data).path
   end
+
+  def stadistics
+    objects = ['page_stadistics','dfp_stadistics','country_stadistics','device_stadistics','traffic_stadistics']
+    result = {}
+    objects.each do |obj|
+      result[obj] = self.send(obj).where( date: @params[:start_date]..@params[:end_date] ).totals
+    end
+    result
+  end
+
+  def totals_stadistics
+    page_stadistics.where( date: @params[:start_date]..@params[:end_date] ).totals_in_range
+  end
+
 end
