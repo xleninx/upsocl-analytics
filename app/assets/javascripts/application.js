@@ -21,6 +21,8 @@
 //= require angular
 //= require angular-ui-router/release/angular-ui-router
 //= require angular-resource/angular-resource
+//= require angular-daterangepicker/js/angular-daterangepicker.min
+//= require bootstrap-daterangepicker/daterangepicker.js
 //= require angular-bootstrap/ui-bootstrap
 //= require nganalytics/src/ng-analytics
 //= require angular-rails-templates
@@ -29,7 +31,7 @@
 //= require_tree ./controllers
 //= require app
 //= require helper_functions
-
+//= require date_picker
 
 //= require flot/jquery.flot.js
 //= require flot/jquery.flot.tooltip.min.js

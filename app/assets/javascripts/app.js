@@ -7,7 +7,8 @@ app = angular.module('upsocl',[
   'upsocl.controllers',
   'upsocl.services',
   'ui.bootstrap',
-  'ngAnalytics'
+  'ngAnalytics',
+  'daterangepicker'
 ])
 
 angular.module('upsocl').config(function($stateProvider) {
