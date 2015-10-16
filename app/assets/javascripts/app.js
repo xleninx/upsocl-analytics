@@ -6,8 +6,6 @@ app = angular.module('upsocl',[
   'ngResource',
   'upsocl.controllers',
   'upsocl.services',
-  'ui.bootstrap',
-  'ngAnalytics',
   'daterangepicker'
 ])
 
