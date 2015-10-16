@@ -39,16 +39,26 @@ class Url < ActiveRecord::Base
   end
 
   def stadistics
-    objects = ['page_stadistics','dfp_stadistics','country_stadistics','device_stadistics','traffic_stadistics']
+    objects = ['page_stadistics','dfp_stadistics','device_stadistics','traffic_stadistics']
     result = {}
     objects.each do |obj|
       result[obj] = self.send(obj).where( date: @params[:start_date]..@params[:end_date] ).totals
     end
+    result['country_stadistics'] = country_stadistics.where( date: @params[:start_date]..@params[:end_date] ).totals(associated_countries)
     result
   end
 
   def totals_stadistics
-    page_stadistics.where( date: @params[:start_date]..@params[:end_date] ).totals_in_range
+    if countries.any?
+      country_stadistics.where( date: @params[:start_date]..@params[:end_date] ).totals_filtered_by(associated_countries)[0]
+    else
+      page_stadistics.where( date: @params[:start_date]..@params[:end_date] ).totals_in_range
+    end
+
+  end
+
+  def associated_countries
+    countries.map(&:code)
   end
 
 end
