@@ -12,7 +12,7 @@ function make_map_graphic(info){
   $('.table-country>*').remove();
   $.each(info, function(index, i){
     data[i.code] = i.pageviews;
-    $('.table-country').append('<tr><td>'+i.name+'</td><td class="text-center"><span class="label label-primary">'+i.pageviews+'</span></td></tr>');
+    $('.table-country').append('<tr><td>'+i.name+'</td><td class="text-center"><span class="label label-primary">'+i.pageviews_percent+'</span></td></tr>');
   });
 
   $('#world-map').vectorMap({
@@ -31,7 +31,7 @@ function make_map_graphic(info){
       series: {
           regions: [{
               values: data,
-              scale: ["#1ab394", "#22d6b1"],
+              scale: ["#40D2B4", "#22d6b1", "#128C73"],
               normalizeFunction: 'polynomial'
           }]
       },
