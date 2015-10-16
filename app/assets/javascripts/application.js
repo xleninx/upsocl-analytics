@@ -23,8 +23,6 @@
 //= require angular-resource/angular-resource
 //= require angular-daterangepicker/js/angular-daterangepicker.min
 //= require bootstrap-daterangepicker/daterangepicker.js
-//= require angular-bootstrap/ui-bootstrap
-//= require nganalytics/src/ng-analytics
 //= require angular-rails-templates
 //= require_tree ./templates
 //= require_tree ./services
