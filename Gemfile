@@ -18,7 +18,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # chosen
 gem 'chosen-rails'
-gem 'compass-rails', '~> 2.0.4'
+# gem 'compass-rails', '~> 2.0.4'
 
 # gem for get dfp info
 gem 'google-dfp-api'
