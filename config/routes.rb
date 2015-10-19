@@ -17,6 +17,10 @@ Rails.application.routes.draw do
 
   resources :campaigns, only: [:index, :show]
   resources :urls, only: [:show]
+
+  get 'show_view', to: 'urls#show_view'
+  get 'index_view', to: 'urls#index_view'
+
   resources :analytics do
     collection do
       get '/graphs/:id', to: 'analytics#graphs'

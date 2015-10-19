@@ -1,5 +1,5 @@
 class UrlsController < ApplicationController
-
+  layout false
   def show
     @url = Url.find(params[:id])
     @url.params = { :start_date => params[:startDate].to_time, :end_date => params[:endDate].to_time }

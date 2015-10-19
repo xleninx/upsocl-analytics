@@ -1,4 +1,3 @@
-var base_path = '/assets/templates/'
 var app
 app = angular.module('upsocl',[
   'templates',
@@ -12,11 +11,11 @@ app = angular.module('upsocl',[
 angular.module('upsocl').config(function($stateProvider) {
   $stateProvider.state('campaigns', {
     url: '/',
-    templateUrl: base_path + 'index.html.slim',
+    templateUrl: 'index_view',
     controller: 'CampaignListController'
   }).state('viewCampaignUrl', { //state for showing single movie
     url: '/campaign/urls/:id',
-    templateUrl: base_path + 'show.html.slim',
+    templateUrl: 'show_view',
     controller: 'CampaignUrlViewController'
   })
 }).run(function($state) {
