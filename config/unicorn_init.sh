@@ -8,77 +8,60 @@
 # Short-Description: Manage unicorn server
 # Description:       Start, stop, restart unicorn server for a specific application.
 ### END INIT INFO
+
 set -e
 
-# Feel free to change any of the following variables for your app:
-TIMEOUT=${TIMEOUT-60}
-APP_ROOT=/home/upsocl/app/upsocl-analytics
-PID=$APP_ROOT/tmp/pids/unicorn.pid
-CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
-AS_USER=deployer
-set -u
+USAGE="Usage: $0 <start|stop|restart|upgrade|rotate|force-stop>"
 
-OLD_PIN="$PID.oldbin"
+# app settings
+USER="upsocl"
+APP_NAME="upsocl-analytics"
+APP_ROOT="/home/upsocl/app/upsocl-analytics"
+ENV="production"
+
+# environment settings
+CMD="cd $APP_ROOT && bundle exec unicorn -c config/unicorn.rb -E $ENV -D"
+PID="$APP_ROOT/shared/pids/unicorn.pid"
+OLD_PID="$PID.oldbin"
+
+# make sure the app exists
+cd $APP_ROOT || exit 1
 
 sig () {
-  test -s "$PID" &amp;&amp; kill -$1 `cat $PID`
+  test -s "$PID" && kill -$1 `cat $PID`
 }
 
 oldsig () {
-  test -s $OLD_PIN &amp;&amp; kill -$1 `cat $OLD_PIN`
+  test -s $OLD_PID && kill -$1 `cat $OLD_PID`
 }
 
-run () {
-  if [ "$(id -un)" = "$AS_USER" ]; then
-    eval $1
-  else
-    su -c "$1" - $AS_USER
-  fi
-}
-
-case "$1" in
-start)
-  sig 0 &amp;&amp; echo &gt;&amp;2 "Already running" &amp;&amp; exit 0
-  run "$CMD"
-  ;;
-stop)
-  sig QUIT &amp;&amp; exit 0
-  echo &gt;&amp;2 "Not running"
-  ;;
-force-stop)
-  sig TERM &amp;&amp; exit 0
-  echo &gt;&amp;2 "Not running"
-  ;;
-restart|reload)
-  sig HUP &amp;&amp; echo reloaded OK &amp;&amp; exit 0
-  echo &gt;&amp;2 "Couldn't reload, starting '$CMD' instead"
-  run "$CMD"
-  ;;
-upgrade)
-  if sig USR2 &amp;&amp; sleep 2 &amp;&amp; sig 0 &amp;&amp; oldsig QUIT
-  then
-    n=$TIMEOUT
-    while test -s $OLD_PIN &amp;&amp; test $n -ge 0
-    do
-      printf '.' &amp;&amp; sleep 1 &amp;&amp; n=$(( $n - 1 ))
-    done
-    echo
-
-    if test $n -lt 0 &amp;&amp; test -s $OLD_PIN
-    then
-      echo &gt;&amp;2 "$OLD_PIN still exists after $TIMEOUT seconds"
-      exit 1
-    fi
-    exit 0
-  fi
-  echo &gt;&amp;2 "Couldn't upgrade, starting '$CMD' instead"
-  run "$CMD"
-  ;;
-reopen-logs)
-  sig USR1
-  ;;
-*)
-  echo &gt;&amp;2 "Usage: $0 &lt;start|stop|restart|upgrade|force-stop|reopen-logs&gt;"
-  exit 1
-  ;;
+case $1 in
+  start)
+    sig 0 && echo >&2 "Already running" && exit 0
+    echo "Starting $APP_NAME"
+    su - $USER -c "$CMD"
+    ;;
+  stop)
+    echo "Stopping $APP_NAME"
+    sig QUIT && exit 0
+    echo >&2 "Not running"
+    ;;
+  force-stop)
+    echo "Force stopping $APP_NAME"
+    sig TERM && exit 0
+    echo >&2 "Not running"
+    ;;
+  restart|reload|upgrade)
+    sig USR2 && echo "reloaded $APP_NAME" && exit 0
+    echo >&2 "Couldn't reload, starting '$CMD' instead"
+    $CMD
+    ;;
+  rotate)
+    sig USR1 && echo rotated logs OK && exit 0
+    echo >&2 "Couldn't rotate logs" && exit 1
+    ;;
+  *)
+    echo >&2 $USAGE
+    exit 1
+    ;;
 esac
