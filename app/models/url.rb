@@ -23,15 +23,21 @@ class Url < ActiveRecord::Base
   end
 
   def set_title
-    agent = Mechanize.new
-    agent.get(data)
-    self.title = agent.page.title
+    if !title.nil? and data_changed?
+      agent = Mechanize.new
+      agent.get(data)
+      self.title = agent.page.title
+    end
   end
 
   def make_screenshot
-    f = Screencap::Fetcher.new(self.data)
-    screenshot = f.fetch(:output => Rails.root.join('public', 'screenshot', "#{self.id}.png"))
-    Magick::Image.read(screenshot).first.crop(0, 110, 1080, 395).write( Rails.root.join('public', 'screenshot', "#{self.id}.png") )
+    if (created_at == updated_at) or data_changed?
+      f = Screencap::Fetcher.new(self.data)
+      path = Rails.root.join('public', 'screenshot', "#{self.id}.png")
+      File.delete( path ) if File.exist?( path )
+      screenshot = f.fetch( :output => path )
+      Magick::Image.read(screenshot).first.crop(0, 110, 1080, 395).write( path )
+    end
   end
 
   def only_path
