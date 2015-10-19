@@ -16,6 +16,9 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# gem unicorn
+gem "unicorn-rails"
+
 # gem for get dfp info
 gem 'google-dfp-api'
 
