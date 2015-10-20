@@ -22,9 +22,7 @@ class Url < ActiveRecord::Base
 
   def set_title
     if data_changed?
-      agent = Mechanize.new
-      agent.get(data)
-      self.title = agent.page.title
+      self.title = Pismo[data].title
     end
   end
 

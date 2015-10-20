@@ -38,7 +38,7 @@ gem 'momentjs-rails'
 gem 'draper', '~> 1.3'
 
 # Analize other page data
-gem 'mechanize'
+gem 'pismo'
 
 # Credential google auth
 gem 'google-oauth2-installed'
