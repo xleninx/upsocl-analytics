@@ -12,18 +12,16 @@ class Url < ActiveRecord::Base
   validates :data, presence: true, url: { no_local: true, message: 'el formato no es correto' }
   validates :line_id, presence: true
 
-  before_save :set_title, :make_screenshot
+  before_save :set_title
+  after_save :make_screenshot
+  before_destroy { |record| clean_screenshot(record.id) }
 
   def social_count
     SocialShares.selected data, %w(facebook google twitter)
   end
 
-  def analytics_data
-    Analytic.new.data_for(source: 'Page', url: only_path).first
-  end
-
   def set_title
-    if !title.nil? and data_changed?
+    if data_changed?
       agent = Mechanize.new
       agent.get(data)
       self.title = agent.page.title
@@ -31,13 +29,17 @@ class Url < ActiveRecord::Base
   end
 
   def make_screenshot
-    if (created_at == updated_at) or data_changed?
-      f = Screencap::Fetcher.new(self.data)
-      path = Rails.root.join('public', 'screenshot', "#{self.id}.png")
-      File.delete( path ) if File.exist?( path )
-      screenshot = f.fetch( :output => path )
-      Magick::Image.read(screenshot).first.crop(0, 110, 1080, 395).write( path )
-    end
+    f = Screencap::Fetcher.new(self.data)
+    path = Rails.root.join('public', 'screenshot', "#{self.id}.png")
+    File.delete( path ) if File.exist?( path )
+    screenshot = f.fetch( :output => path )
+    Magick::Image.read(screenshot).first.crop(0, 110, 1080, 395).write( path )
+  end
+  handle_asynchronously :make_screenshot
+
+  def clean_screenshot(id)
+    path = Rails.root.join('public', 'screenshot', "#{id}.png")
+    File.delete( path ) if File.exist?( path )
   end
 
   def only_path
@@ -60,7 +62,6 @@ class Url < ActiveRecord::Base
     else
       page_stadistics.where( date: @params[:start_date]..@params[:end_date] ).totals_in_range
     end
-
   end
 
   def associated_countries
