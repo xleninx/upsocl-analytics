@@ -18,6 +18,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # background Job
 gem 'delayed_job_active_record'
+gem "daemons"
 
 # Cron Jobs
 gem 'whenever', :require => false
