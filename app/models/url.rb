@@ -31,7 +31,7 @@ class Url < ActiveRecord::Base
     path = Rails.root.join('public', 'screenshot', "#{self.id}.png")
     File.delete( path ) if File.exist?( path )
     screenshot = f.fetch( :output => path )
-    Magick::Image.read(screenshot).first.crop(0, 110, 1080, 395).write( path )
+    Magick::Image.read(screenshot).first.crop(0, 0, 1080, 395).write( path )
   end
   handle_asynchronously :make_screenshot
 
