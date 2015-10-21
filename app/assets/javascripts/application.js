@@ -19,9 +19,9 @@
 //= require underscore
 //= require slimscroll/jquery.slimscroll.min
 //= require angular
-//= require angular-ui-router/release/angular-ui-router
 //= require angular-resource/angular-resource
 //= require angular-daterangepicker/js/angular-daterangepicker.min
+//= require angular-ui-router/release/angular-ui-router
 //= require bootstrap-daterangepicker/daterangepicker.js
 //= require angular-rails-templates
 //= require_tree ./templates
