@@ -60,10 +60,7 @@ gem 'validate_url'
 gem 'social_shares', :github => "xleninx/social_shares"
 
 #Take screen to page
-gem 'imgkit'
-gem 'wkhtmltoimage-binary'
-#gem 'screencap'
-gem 'rmagick'
+gem 'cloudinary'
 
 # ActiveAdmin
 gem 'activeadmin', '~> 1.0.0.pre1'

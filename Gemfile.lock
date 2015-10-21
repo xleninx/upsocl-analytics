@@ -72,6 +72,7 @@ GEM
       execjs
       json
     awesome_print (1.6.1)
+    aws_cf_signer (0.1.3)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -93,6 +94,9 @@ GEM
     childprocess (0.5.6)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
+    cloudinary (1.1.0)
+      aws_cf_signer
+      rest-client
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -183,7 +187,6 @@ GEM
     httpi (1.1.1)
       rack
     i18n (0.7.0)
-    imgkit (1.6.1)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
       has_scope (~> 0.6.0.rc)
@@ -297,7 +300,6 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rmagick (2.15.4)
     rspec-core (3.3.2)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.1)
@@ -402,7 +404,6 @@ GEM
     websocket (1.2.2)
     whenever (0.9.4)
       chronic (>= 0.6.3)
-    wkhtmltoimage-binary (0.12.2)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -416,6 +417,7 @@ DEPENDENCIES
   bower-rails (~> 0.10.0)
   byebug
   capybara
+  cloudinary
   coffee-rails (~> 4.1.0)
   cucumber-rails
   daemons
@@ -429,7 +431,6 @@ DEPENDENCIES
   font-awesome-rails (= 4.3.0.0)
   google-dfp-api
   google-oauth2-installed
-  imgkit
   jbuilder (~> 2.0)
   jquery-rails
   legato
@@ -439,7 +440,6 @@ DEPENDENCIES
   pry-rails
   rails (= 4.2.4)
   rails_12factor (= 0.0.3)
-  rmagick
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
@@ -454,7 +454,6 @@ DEPENDENCIES
   validate_url
   web-console (~> 2.0)
   whenever
-  wkhtmltoimage-binary
 
 BUNDLED WITH
    1.10.6

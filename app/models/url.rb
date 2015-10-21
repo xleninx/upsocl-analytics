@@ -1,5 +1,5 @@
 class Url < ActiveRecord::Base
-  require 'imgkit'
+
   belongs_to :campaign
   has_and_belongs_to_many :countries
   has_many :page_stadistics
@@ -28,13 +28,20 @@ class Url < ActiveRecord::Base
   end
 
   def make_screenshot
+    url =  Cloudinary::Utils.cloudinary_url(data,
+    :type => "url2png",
+    :crop => "fill", :width => 1080, :height => 320, :gravity => :north,
+    :sign_url => true)
     path = Rails.root.join('public', 'screenshot', "#{self.id}.png")
-    kit = IMGKit.new(data, :quality => 90)
-    #f = Screencap::Fetcher.new(self.data)
-    File.delete( path ) if File.exist?( path )
-    File.open(path, 'wb') { |f| f << kit.to_img }
-    #screenshot = f.fetch( :output => path )
-    Magick::Image.read(path).first.crop(0, 0, 1080, 395).write( path )
+    open(path, 'wb') do |file|
+      file << open(url).read
+    end
+    # kit = IMGKit.new(data, :quality => 90)
+    # #f = Screencap::Fetcher.new(self.data)
+    # File.delete( path ) if File.exist?( path )
+    # File.open(path, 'wb') { |f| f << kit.to_img }
+    # #screenshot = f.fetch( :output => path )
+    # Magick::Image.read(path).first.crop(0, 0, 1080, 395).write( path )
   end
   handle_asynchronously :make_screenshot
 
