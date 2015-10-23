@@ -31,7 +31,7 @@ function progress_percent(arr, label, typeData){
     }
   }
 
-  return {percent: percent.toFixed(), html_class: html_class, progress_class: progress_class}
+  return {percent: Math.abs(percent.toFixed()), html_class: html_class, progress_class: progress_class}
 }
 
 String.prototype.capitalize = function() {

@@ -55,12 +55,13 @@ class Url < ActiveRecord::Base
   end
 
   def stadistics
-    objects = ['page_stadistics','dfp_stadistics','device_stadistics','traffic_stadistics']
+    objects = ['dfp_stadistics','device_stadistics','traffic_stadistics']
     result = {}
     objects.each do |obj|
       result[obj] = self.send(obj).where( date: @params[:start_date]..@params[:end_date] ).totals
     end
     result['country_stadistics'] = country_stadistics.where( date: @params[:start_date]..@params[:end_date] ).totals(associated_countries)
+    result['page_stadistics'] = country_stadistics.where( date: @params[:start_date]..@params[:end_date] ).totals_by_date(associated_countries)
     result
   end
 

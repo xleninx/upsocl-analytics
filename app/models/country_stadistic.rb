@@ -4,6 +4,8 @@ class CountryStadistic < ActiveRecord::Base
 
   scope :totals, -> (countries) { (countries.any? ? where('country_code in (?)', countries) : self ).group(:country_name, :country_code).sum(:pageviews).map {|c| { name: c[0][0], code: c[0][1], pageviews: c[1], pageviews_percent: to_percent(c[1], countries) } } }
 
+  scope :totals_by_date, -> (countries) { (countries.any? ? where('country_code in (?)', countries) : self ).group(:date, :id).order(:date) }
+
   scope :totals_filtered_by, -> (countries) { where('country_code in (?)', countries).select(['SUM(pageviews) as pageviews', 'SUM(users) as users', 'trunc((AVG(avgtimeonpage) /60)::numeric,2) as avgtimeonpage' ]) }
 
   def self.to_percent(val, countries)
