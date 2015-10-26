@@ -6,6 +6,22 @@ function toPercent(total, value){
   return (value * 100) / total
 }
 
+function size_legend(arr){
+  var date_start = moment(_.first(arr)['date']);
+  var date_end = moment(_.last(arr)['date']);
+  var diff = date_end.diff(date_start, 'days');
+  var limit = 1;
+
+  if(diff > 50){
+    limit = 5;
+  }else if(diff > 30){
+    limit = 3;
+  }else if(diff > 20){
+    limit = 2;
+  }
+  return limit;
+}
+
 function progress_percent(arr, label, typeData){
   var today = arr[arr.length - 1][label];
   var last_day = arr[arr.length -2][label];

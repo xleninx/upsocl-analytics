@@ -128,11 +128,10 @@ function make_bars_chart(data){
       }
   ];
 
-
   var options = {
       xaxis: {
           mode: "time",
-          tickSize: [1, "day"],
+          tickSize: [size_legend(data), "day"],
           tickLength: 0,
           axisLabel: "Date",
           axisLabelUseCanvas: true,
