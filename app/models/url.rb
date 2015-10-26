@@ -36,12 +36,6 @@ class Url < ActiveRecord::Base
     open(path, 'wb') do |file|
       file << open(url).read
     end
-    # kit = IMGKit.new(data, :quality => 90)
-    # #f = Screencap::Fetcher.new(self.data)
-    # File.delete( path ) if File.exist?( path )
-    # File.open(path, 'wb') { |f| f << kit.to_img }
-    # #screenshot = f.fetch( :output => path )
-    # Magick::Image.read(path).first.crop(0, 0, 1080, 395).write( path )
   end
   handle_asynchronously :make_screenshot
 
