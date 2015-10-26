@@ -78,18 +78,14 @@ function set_process_data(hash, html_id){
 
 function make_bars_chart(data){
   var arr_pageviews = [];
-  var arr_avgtimeonpage = [];
 
   $.each(data, function(index, i){
     arr_pageviews.push([moment(i.date).toDate(), parseInt(i.pageviews)])
-    arr_avgtimeonpage.push([moment(i.date).toDate(), parseInt(i.avgtimeonpage) / 60])
   });
 
   $('#total-visits').html(totalize(arr_pageviews, 1));
-  $('#total-time').html((totalize(arr_avgtimeonpage, 1) / arr_avgtimeonpage.length).toFixed() + ' Min');
 
   set_process_data(progress_percent(arr_pageviews, 1, 'normal'), '#visits-percent');
-  set_process_data(progress_percent(arr_avgtimeonpage, 1, 'time'), '#time-percent');
   var dataset = [
       {
           label: "Paginas Vistas",
@@ -102,29 +98,6 @@ function make_bars_chart(data){
               lineWidth: 0
           }
 
-      }, {
-          label: "Tiempo Promedio (Min)",
-          data: arr_avgtimeonpage,
-          yaxis: 2,
-          color: "#1C84C6",
-          lines: {
-              lineWidth: 1,
-              show: true,
-              fill: true,
-              fillColor: {
-                  colors: [{
-                      opacity: 0.2
-                  }, {
-                      opacity: 0.2
-                  }]
-              }
-          },
-          splines: {
-              show: false,
-              tension: 0.6,
-              lineWidth: 1,
-              fill: 0.1
-          },
       }
   ];
 
