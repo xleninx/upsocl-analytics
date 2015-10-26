@@ -44,6 +44,9 @@ namespace :analytics do
     when 'month'
       @start_date = 1.month.ago
       @end_date = Time.now
+    when '6month'
+      @start_date = 6.month.ago
+      @end_date = Time.now
     when 'week'
       @start_date = 1.week.ago
       @end_date = Time.now
