@@ -35,7 +35,7 @@ ActiveAdmin.register User do
     f.inputs "User Details" do
       f.input :email
       f.input :name
-      f.input :campaigns, :as => :select, :input_html => {:multiple => true}
+      f.input :campaigns, :as => :select, :input_html => {:multiple => true, :class => "chosen-input"}
       f.input :admin
       f.input :password if f.object.new_record?
       f.input :password_confirmation if f.object.new_record?
