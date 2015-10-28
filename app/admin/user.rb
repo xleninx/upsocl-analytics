@@ -1,13 +1,13 @@
 ActiveAdmin.register User do
-  permit_params :email, :name, :active,:password, :password_confirmation, campaign_ids: []
+  permit_params :email, :name, :admin,:password, :password_confirmation, campaign_ids: []
 
   show do
     panel 'Detalles de Usuario' do
       attributes_table_for user do
         row :id
         row :name
-        row :active do
-          t("#{user.active}_value", scope: 'activerecord.attributes.user/active')
+        row :admin do
+          t("#{user.admin}_value", scope: 'activerecord.attributes.user/admin')
         end
         row :campaigns do
           user.join_campaigns
@@ -36,7 +36,7 @@ ActiveAdmin.register User do
       f.input :email
       f.input :name
       f.input :campaigns, :as => :select, :input_html => {:multiple => true}
-      f.input :active
+      f.input :admin
       f.input :password if f.object.new_record?
       f.input :password_confirmation if f.object.new_record?
     end
