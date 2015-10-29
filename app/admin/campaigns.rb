@@ -36,7 +36,7 @@ ActiveAdmin.register Campaign do
     f.inputs do
       f.has_many :urls, heading: 'Direcciones Url', allow_destroy: true, new_record: 'Añadir' do |a|
         a.input :data, label: 'URL'
-        a.input :line_id, label: 'Line ID'
+        a.input :line_id, label: 'Line ID', :input_html => { :type => 'text' }
         a.input :countries, :as => :select, :input_html => {:multiple => true, :class => "chosen-input"}, label: 'Paises'
       end
     end
