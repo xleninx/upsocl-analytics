@@ -23,7 +23,7 @@ class Url < ActiveRecord::Base
 
   def set_title
     if data_changed?
-      self.title = Pismo[data].title
+      self.title = Pismo[data].titles.last
     end
   end
 
