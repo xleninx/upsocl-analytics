@@ -14,7 +14,8 @@ class Url < ActiveRecord::Base
   validates :line_id, presence: true
 
   before_save :set_title
-  after_save :make_screenshot, :run_task
+  after_create :make_screenshot, :run_analytics_task
+  before_update :run_bg_task
   before_destroy { |record| clean_screenshot(record.id) }
 
   def social_count
@@ -27,10 +28,17 @@ class Url < ActiveRecord::Base
     end
   end
 
-  def run_task
+  def run_bg_task
+    if self.data_changed?
+      make_screenshot
+      run_analytics_task
+    end
+  end
+
+  def run_analytics_task
     Rake::Task["analytics:add_records"].invoke('week', id)
   end
-  handle_asynchronously :run_task
+  handle_asynchronously :run_analytics_task
 
   def make_screenshot
     url =  Cloudinary::Utils.cloudinary_url(data,
