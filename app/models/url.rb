@@ -23,12 +23,8 @@ class Url < ActiveRecord::Base
 
   def set_title
     if data_changed?
-      self.title = Pismo[data].titles.last.clean_title
+      self.title = Pismo[data].titles.last.split(' | ').first
     end
-  end
-
-  def clean_title
-    split(' | ').first
   end
 
   def make_screenshot
