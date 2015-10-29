@@ -14,7 +14,7 @@ class Url < ActiveRecord::Base
   validates :line_id, presence: true
 
   before_save :set_title
-  after_save :make_screenshot
+  after_save :make_screenshot, :run_task
   before_destroy { |record| clean_screenshot(record.id) }
 
   def social_count
@@ -26,6 +26,11 @@ class Url < ActiveRecord::Base
       self.title = Pismo[data].titles.last.split(' | ').first
     end
   end
+
+  def run_task
+    Rake::Task["analytics:add_records"].invoke('week', id)
+  end
+  handle_asynchronously :run_task
 
   def make_screenshot
     url =  Cloudinary::Utils.cloudinary_url(data,

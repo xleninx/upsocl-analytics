@@ -1,9 +1,12 @@
 namespace :analytics do
   desc "Call Google Analytics Api for get data of url"
-  task :add_records, [:time] => :environment do |t, args|
-    time = args.time
-    time_range(time)
-    urls = Url.all
+  task :add_records, [:time, :url_id] => :environment do |t, args|
+    time_range(args.time)
+    if args.url_id.nil?
+      urls = Url.all
+    else
+      urls = [Url.find(args.url_id)]
+    end
 
     urls.each do |url|
       page_stadistics = AnalyticConnection.new.historical_data_for(source: 'Page', url: url.only_path, start_date: @start_date, end_date: @end_date)
