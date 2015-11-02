@@ -11,7 +11,7 @@
           | {{ url.campaign.name }}
   .col-sm-4
     h2.ng-binding.text-center Rango de Fechas
-    input.input-sm.form-control.text-center.date-picker date-range-picker='' options="opts" ng-model="date" type="text" placeholder='Selecciones fechas a consultar' /
+    input#daterange.input-sm.form-control.text-center.date-picker date-range-picker='' options="opts" ng-model="date" type="text" placeholder='Selecciones fechas a consultar' /
 
 div#url_id data="{{ url.id }}"
 .wrapper.wrapper-content
@@ -20,7 +20,7 @@ div#url_id data="{{ url.id }}"
       h2 
         | {{ url.title }}
     .screenshot
-      img.center-block src="/screenshot/{{ url.id }}.png"
+      img.center-block.img-responsive src="{{ url.screenshot.url }}"
   .row
     .col-lg-12
       .ibox.float-e-margins.text-center

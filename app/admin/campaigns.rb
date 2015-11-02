@@ -1,5 +1,5 @@
 ActiveAdmin.register Campaign do
-  permit_params :name, :url, user_ids: [], urls_attributes: [ :id, :data, :line_id, :_destroy, :country_ids=> [] ]
+  permit_params :name, :url, user_ids: [],urls_attributes: [ :id, :data, :screenshot, :line_id, :_destroy, :country_ids=> [] ]
 
   show do
     panel 'Detalles de la Camapaña' do
@@ -36,6 +36,7 @@ ActiveAdmin.register Campaign do
     f.inputs do
       f.has_many :urls, heading: 'Direcciones Url', allow_destroy: true, new_record: 'Añadir' do |a|
         a.input :data, label: 'URL'
+        a.input :screenshot
         a.input :line_id, label: 'Line ID', :input_html => { :type => 'text' }
         a.input :countries, :as => :select, :input_html => {:multiple => true, :class => "chosen-input"}, label: 'Paises'
       end

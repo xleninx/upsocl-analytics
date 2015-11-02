@@ -9,6 +9,7 @@ class Url < ActiveRecord::Base
   has_many :traffic_stadistics
 
   attr_accessor :params
+  mount_uploader :screenshot, ScreenshotUploader
 
   validates :data, presence: true, url: { no_local: true, message: 'el formato no es correto' }
   validates :line_id, presence: true
@@ -41,13 +42,14 @@ class Url < ActiveRecord::Base
   handle_asynchronously :run_analytics_task
 
   def make_screenshot
-    url =  Cloudinary::Utils.cloudinary_url(data,
-    :type => "url2png",
-    :crop => "fill", :width => 1080, :height => 320, :gravity => :north,
-    :sign_url => true)
-    path = Rails.root.join('public', 'screenshot', "#{self.id}.png")
-    open(path, 'wb') do |file|
-      file << open(url).read
+    if screenshot.nil?
+      url =  Cloudinary::Utils.cloudinary_url(data, :type => "url2png", :crop => "fill", :width => 1080, :height => 320, :gravity => :north, :sign_url => true)
+      path = Rails.root.join('public', 'screenshot', "screenshot.png")
+      open(path, 'wb') do |file|
+        file << open(url).read
+      end
+      screenshot = path
+      File.delete(path)
     end
   end
   handle_asynchronously :make_screenshot

@@ -26,6 +26,9 @@ gem 'whenever', :require => false
 # gem unicorn
 gem "unicorn-rails"
 
+# gem upload images
+gem 'carrierwave'
+
 # gem for get dfp info
 gem 'google-dfp-api'
 
