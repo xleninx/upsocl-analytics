@@ -8,6 +8,9 @@ angular.module('upsocl.controllers', []).controller('CampaignListController', fu
     var endDate = newDate.endDate.format('YYYY-MM-DD');
       $scope.url = Url.get({ id: $stateParams.id, startDate: startDate, endDate: endDate }, function(data){
         draw_graphics($stateParams.id, data.stadistics);
+        $('#daterange').data('daterangepicker').setStartDate(moment().startOf("year"));
+        $('#daterange').data('daterangepicker').setEndDate(moment());
+        $scope.datePicker.date = {startDate: null, endDate: null};
       });
   }, false);
 })
