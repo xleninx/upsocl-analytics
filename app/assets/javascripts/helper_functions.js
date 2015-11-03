@@ -31,12 +31,13 @@ function progress_percent(arr, label, typeData){
   if (today < last_day){
     html_class = 'text-danger fa fa-level-down';
     progress_class = 'progress-bar progress-bar-danger';
-    if (today <= 0) { today = 1; }
-    var percent = (today - last_day) * 100;
+    if (last_day <= 0) { last_day = 1; }
+    var percent = ((today - last_day) / last_day) * 100;
   }else{
     html_class = 'text-navy fa fa-level-up';
     progress_class = 'progress-bar';
-    var percent = (today - last_day) * 100;
+    if (last_day <= 0) { last_day = 1; }
+    var percent = ((today - last_day) / last_day) * 100;
   }
 
   return {percent: Math.abs(percent.toFixed()), html_class: html_class, progress_class: progress_class}
