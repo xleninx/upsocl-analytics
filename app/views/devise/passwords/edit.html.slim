@@ -1,0 +1,22 @@
+.middle-box.text-center.loginscreen.animated.fadeInDown
+  div
+    div
+      = image_tag('logo-upsocl.png')
+    h3 Cambiar Contraseña
+    p
+      | Ingresa tu nueva contraseña para terminar el proceso
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| 
+      = devise_error_messages! 
+      = f.hidden_field :reset_password_token
+      
+      .form-group
+        = f.password_field :password, autofocus: true, autocomplete: "off", class:"form-control", placeholder:'Contraseña'
+      .form-group
+        = f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder:'Confirmar Contraseña'
+
+      = f.submit "Cambiar", class:'btn btn-primary block full-width m-b'
+
+      = link_to new_session_path(resource_name) do
+          small Iniciar Sesion
+    p.m-t
+      small Upsocl.com &copy; 2015
