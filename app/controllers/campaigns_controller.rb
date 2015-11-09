@@ -20,7 +20,7 @@ class CampaignsController < ApplicationController
 
   def checked_campaings
     if current_user.admin?
-      Campaign.all
+      Campaign.all.order(:name)
     else
       current_user.campaigns
     end
