@@ -43,19 +43,19 @@ namespace :analytics do
     case time
     when 'year'
       @start_date = 1.year.ago
-      @end_date = Time.now
+      @end_date = 1.day.ago
     when 'month'
       @start_date = 1.month.ago
-      @end_date = Time.now
+      @end_date = 1.day.ago
     when '6month'
       @start_date = 6.month.ago
-      @end_date = Time.now
+      @end_date = 1.day.ago
     when 'week'
       @start_date = 1.week.ago
-      @end_date = Time.now
+      @end_date = 1.day.ago
     when 'day'
       @start_date = 1.day.ago
-      @end_date = Time.now
+      @end_date = 1.day.ago
     end
   end
 
