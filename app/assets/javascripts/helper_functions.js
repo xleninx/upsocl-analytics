@@ -46,3 +46,14 @@ function progress_percent(arr, label, typeData){
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
+
+function get_report(){
+  var pdf = new jsPDF('p', 'in', [17,36]);
+   var options = {
+      pagesplit: false
+  };
+  $(".wrapper-content").css('background', '#f3f3f4')
+  pdf.addHTML($('.wrapper-content'), 0, 0, options, function(){
+      pdf.save("Upsocl Analitycs Report.pdf");
+  });
+}

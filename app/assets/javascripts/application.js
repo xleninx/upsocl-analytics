@@ -29,6 +29,9 @@
 //= require app
 //= require helper_functions
 //= require date_picker
+//= require html2canvas
+//= require jspdf
+//= require html2canvas.svg.js
 
 //= require flot/jquery.flot.js
 //= require flot/jquery.flot.tooltip.min.js
