@@ -12,10 +12,10 @@ function size_legend(arr){
   var diff = date_end.diff(date_start, 'days');
   var limit = 1;
 
-  if(diff > 50){
-    limit = 5;
+  if(diff > 70){
+    limit = 15;
   }else if(diff > 30){
-    limit = 3;
+    limit = 5;
   }else if(diff > 20){
     limit = 2;
   }
