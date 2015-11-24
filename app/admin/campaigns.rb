@@ -1,5 +1,5 @@
 ActiveAdmin.register Campaign do
-  permit_params :name, :url, user_ids: [],urls_attributes: [ :id, :data, :screenshot, :line_id, :_destroy, :country_ids=> [] ]
+  permit_params :name, :url, user_ids: [], urls_attributes: [ :id, :data, :publicity, :screenshot, :line_id, :_destroy, :country_ids=> [] ]
 
   show do
     panel 'Detalles de la Camapaña' do
@@ -38,6 +38,7 @@ ActiveAdmin.register Campaign do
         a.input :data, label: 'URL'
         a.input :screenshot
         a.input :line_id, label: 'Line ID', :input_html => { :type => 'text' }
+        a.input :publicity, label: 'Con publicidad'
         a.input :countries, :as => :select, :input_html => {:multiple => true, :class => "chosen-input"}, label: 'Paises'
       end
     end

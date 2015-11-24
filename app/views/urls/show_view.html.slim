@@ -38,7 +38,10 @@ div#url_id data="{{ url.id }}"
           h5 Impresiones
         .ibox-content
           h1.no-margins 
-            | {{ url.stadistics.dfp_stadistics.impressions }}
+            div ng-if="url.publicity == true"
+              | {{ url.stadistics.dfp_stadistics.impressions }}
+            div ng-if="url.publicity != true"
+              | 0  
           small Impresiones de Anuncios
     .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
@@ -46,8 +49,11 @@ div#url_id data="{{ url.id }}"
           span.label.label-warning.pull-right DoubleClick
           h5 Clicks
         .ibox-content
-          h1.no-margins 
-            | {{ url.stadistics.dfp_stadistics.clicks }}
+          h1.no-margins
+            div ng-if="url.publicity == true"
+              | {{ url.stadistics.dfp_stadistics.clicks }}
+            div ng-if="url.publicity != true"
+              | 0
           small Clicks en Anuncios
     .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
@@ -55,8 +61,11 @@ div#url_id data="{{ url.id }}"
           span.label.label-warning.pull-right DoubleClick
           h5 CTR
         .ibox-content
-          h1.no-margins 
-            | {{ url.stadistics.dfp_stadistics.ctr | number: 2 }}%
+          h1.no-margins
+            div ng-if="url.publicity == true"
+              | {{ url.stadistics.dfp_stadistics.ctr | number: 2 }}%
+            div ng-if="url.publicity != true"
+              | 0 %
           small % de clicks en Anuncios
     .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
