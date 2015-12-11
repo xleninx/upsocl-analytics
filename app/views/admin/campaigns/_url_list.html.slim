@@ -1,7 +1,12 @@
 ul
   - urls.each do |u|
       li 
-        p = u.data
+        p 
+          strong Url Id 
+          = u.id
+        p 
+          strong Url
+          = u.data
         p 
           strong Line ID 
           = u.line_id
