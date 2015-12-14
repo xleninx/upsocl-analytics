@@ -19,6 +19,8 @@ class Url < ActiveRecord::Base
   before_update :run_bg_task
   before_destroy { |record| clean_screenshot(record.id) }
 
+  scope :update_interval, -> (interval_start, interval_end) { where('created_at between ? and ?', interval_start, interval_end) }
+
   def social_count
     SocialShares.selected data, %w(facebook google twitter)
   end

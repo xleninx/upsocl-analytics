@@ -1,14 +1,18 @@
 namespace :analytics do
   desc "Call Google Analytics Api for get data of url"
-  task :add_records, [:time, :url_id] => :environment do |t, args|
+  task :add_records, [:time, :interval, :url_id] => :environment do |t, args|
     time_range(args.time)
+    interval_range(args.interval)
+
     if args.url_id.nil?
-      urls = Url.all
+      urls = Url.all.update_interval(@start_interval, @end_interval)
     else
       urls = [Url.find(args.url_id)]
     end
 
     urls.each do |url|
+      puts "|||||| --- Updating url with id [#{url.id}] --- |||||||"
+
       page_stadistics = AnalyticConnection.new.historical_data_for(source: 'Page', url: url.only_path, start_date: @start_date, end_date: @end_date)
       country_stadistics = AnalyticConnection.new.historical_data_for(source: 'Country', url: url.only_path, start_date: @start_date, end_date: @end_date)
       traffic_stadistics = AnalyticConnection.new.historical_data_for(source: 'Traffic', url: url.only_path, start_date: @start_date, end_date: @end_date)
@@ -34,9 +38,11 @@ namespace :analytics do
       dfp_stadistics.each do |data|
         DfpStadistic.create(url: url, date: data[:date], line_id: data[:line_id], line_name: data[:line_name], impressions: data[:impressions], clicks: data[:clicks], ctr: data[:ctr])
       end
+
+      url.update(data_updated_at: Time.now)
     end
 
-    puts 'Task complete...'
+    puts "Task complete... Updated #{urls.count} urls"
   end
 
   def time_range(time)
@@ -44,11 +50,11 @@ namespace :analytics do
     when 'year'
       @start_date = 1.year.ago
       @end_date = 1.day.ago
-    when 'month'
-      @start_date = 1.month.ago
-      @end_date = 1.day.ago
     when '6month'
       @start_date = 6.month.ago
+      @end_date = 1.day.ago
+    when 'month'
+      @start_date = 1.month.ago
       @end_date = 1.day.ago
     when 'week'
       @start_date = 1.week.ago
@@ -59,4 +65,17 @@ namespace :analytics do
     end
   end
 
+  def interval_range(time)
+    case time
+    when '6month'
+      @start_interval = 6.month.ago
+      @end_interval = 2.month.ago
+    when 'month'
+      @start_interval = 2.month.ago
+      @end_interval = 3.week.ago
+    when 'day'
+      @start_interval = 3.week.ago
+      @end_interval = 1.day.ago
+    end
+  end
 end
