@@ -25,10 +25,11 @@ div#url_id data="{{ url.id }}"
       .text-center.p-lg
         h3
           | Ultima Actualizacion: 
-          strong.text-danger
+          strong#data_updated_at.color_updated_at data-date="{{ url.created_at }}"
             | {{ url.data_updated_at | date:'d / MM / yyyy, h:mm:ss a' }}  
-        span.text-danger data-toggle="tooltip" data-placement="bottom" title="" data-original-title="La frecuencia de las actualizaciones disminuyen de acuerdo a la vida util promedio de cada post. Los post generalmente tiene un tiempo de vida, durante el cual el numero de visitas es considerablemente alto. Al superar este tiempo de vida, es decir, luego de las primeras dos semanas estas visitas caen, por ello la frecuencia de las actualizaciones va disminuyendo."
-          i.fa.fa-info-circle.fa-2x 
+        span.color_updated_at 
+          i.fa.fa-info-circle.fa-lg
+          span#text-updated-at
   
   .row
     .col-lg-12
@@ -191,5 +192,5 @@ div#url_id data="{{ url.id }}"
                     
                 .col-lg-6
                   #world-map style=("height: 300px;")
-
+  
 = javascript_include_tag 'graphics'
