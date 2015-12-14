@@ -12,5 +12,6 @@ angular.module('upsocl.controllers', []).controller('CampaignListController', fu
         $('#daterange').data('daterangepicker').setEndDate(moment());
         $scope.datePicker.date = {startDate: null, endDate: null};
       });
+      $('[data-toggle="tooltip"]').tooltip();
   }, false);
 })

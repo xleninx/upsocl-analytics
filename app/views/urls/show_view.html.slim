@@ -21,6 +21,15 @@ div#url_id data="{{ url.id }}"
         | {{ url.title }}
     .screenshot
       img.center-block.img-responsive src="{{ url.screenshot.url }}"
+    .row
+      .text-center.p-lg
+        h3
+          | Ultima Actualizacion: 
+          strong.text-danger
+            | {{ url.data_updated_at | date:'d / MM / yyyy, h:mm:ss a' }}  
+        span.text-danger data-toggle="tooltip" data-placement="bottom" title="" data-original-title="La frecuencia de las actualizaciones disminuyen de acuerdo a la vida util promedio de cada post. Los post generalmente tiene un tiempo de vida, durante el cual el numero de visitas es considerablemente alto. Al superar este tiempo de vida, es decir, luego de las primeras dos semanas estas visitas caen, por ello la frecuencia de las actualizaciones va disminuyendo."
+          i.fa.fa-info-circle.fa-2x 
+  
   .row
     .col-lg-12
       .ibox.float-e-margins.text-center
