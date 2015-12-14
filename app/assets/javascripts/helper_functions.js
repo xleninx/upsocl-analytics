@@ -4,15 +4,15 @@ function totalize(arr, key){
 
 function class_updated_at(date){
   var html_class = 'text-navy';
-  var text = ' El articulo se esta actualizando diariamente ';
+  var text = ' Los datos se actualizan diariamente ';
   var days = moment().diff(date, 'days');
 
   if (days > 21 && days < 90){
     html_class = 'text-warning';
-    text = ' El articulo se esta actualizando mensualmente ';
+    text = ' Los datos se esta actualizando mensualmente ';
   }else if( days > 90 ){
     html_class = 'text-danger';
-    text = ' El articulo se esta actualizando cada 6 meses ';
+    text = ' Los datos se actualizan cada 6 meses ';
   }
   console.log(days);
   $('.color_updated_at').addClass(html_class);
