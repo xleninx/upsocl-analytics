@@ -75,7 +75,7 @@ namespace :analytics do
       @end_interval = 3.week.ago
     when 'day'
       @start_interval = 3.week.ago
-      @end_interval = 1.day.ago
+      @end_interval = Time.now
     end
   end
 end
