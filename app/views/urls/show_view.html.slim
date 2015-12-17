@@ -107,12 +107,12 @@ div#url_id data="{{ url.id }}"
     .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
         .ibox-title
-          span.label.label-info.pull-right Twitter
-          h5 Shares
+          span.label.label-danger.pull-right Google Analytcis
+          h5 Atención
         .ibox-content
           h1.no-margins 
-            | {{ url.social_count.twitter }}
-          small Veces Compartido
+            | {{ (url.totals_stadistics.avgtimeonpage * url.totals_stadistics.pageviews) / 60 | number: 2}}
+          small Tiempo de Atención Total (Horas)
     .col-lg-4.col-md-4.col-sm-6
       .ibox.float-e-margins.text-center
         .ibox-title
