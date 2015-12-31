@@ -13,8 +13,6 @@ namespace :analytics do
     urls.each do |url|
       puts "|||||| --- Updating url with id [#{url.id}] --- |||||||"
 
-      File.delete(Rails.root + 'test.csv')
-      
       page_stadistics = AnalyticConnection.new.historical_data_for(source: 'Page', url: url.only_path, start_date: @start_date, end_date: @end_date)
       country_stadistics = AnalyticConnection.new.historical_data_for(source: 'Country', url: url.only_path, start_date: @start_date, end_date: @end_date)
       traffic_stadistics = AnalyticConnection.new.historical_data_for(source: 'Traffic', url: url.only_path, start_date: @start_date, end_date: @end_date)

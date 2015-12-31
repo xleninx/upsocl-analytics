@@ -28,6 +28,12 @@ class DfpConnection
     })
   end
 
+  def test(id)
+    dfp = @dfp
+    report_service = dfp.service(:ReportService, API_VERSION)
+    puts report_service.get_report_job_status(id)
+  end
+
   def run_report(start_date: 7.day.ago, end_date: Time.now, item_id: 0)
     dfp = @dfp
     arr = []
@@ -43,7 +49,7 @@ class DfpConnection
       :end_date => {:year => end_date.year,
                     :month => end_date.month,
                     :day => end_date.day},
-      :dimensions => ['DATE', 'LINE_ITEM_NAME', 'LINE_ITEM_ID'],
+      :dimensions => ['DATE', 'LINE_ITEM_NAME', 'LINE_ITEM_ID', 'COUNTRY_CRITERIA_ID'],
       :columns => ['AD_SERVER_IMPRESSIONS', 'AD_SERVER_CLICKS', 'AD_SERVER_CTR'],
       # Create statement object to filter for an order.
       :statement => {
@@ -76,7 +82,7 @@ class DfpConnection
     source = open(download_url)
     gz = Zlib::GzipReader.new(source)
 
-    open(file_name, 'wb') do |local_file|
+    open(file_name, 'w') do |local_file|
      local_file << gz.read
     end
 
@@ -85,6 +91,7 @@ class DfpConnection
       puts arr
     end
 
+    File.delete(Rails.root + 'test.csv')
     return arr
   end
 end
