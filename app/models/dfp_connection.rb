@@ -49,7 +49,7 @@ class DfpConnection
       :end_date => {:year => end_date.year,
                     :month => end_date.month,
                     :day => end_date.day},
-      :dimensions => ['DATE', 'LINE_ITEM_NAME', 'LINE_ITEM_ID', 'COUNTRY_CRITERIA_ID'],
+      :dimensions => ['DATE', 'LINE_ITEM_NAME', 'LINE_ITEM_ID'],
       :columns => ['AD_SERVER_IMPRESSIONS', 'AD_SERVER_CLICKS', 'AD_SERVER_CTR'],
       # Create statement object to filter for an order.
       :statement => {
