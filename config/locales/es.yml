@@ -24,10 +24,32 @@ es:
       admin_user:
         one: Administrador
         other: Administradores
+      page_stadistic:
+        one: Estadistica de Pagina
+        other: Estadisticas de Pagina
+      country_stadistic:
+        one: Estadistica de pais
+        other: Estadisticas de pais
+      dfp_stadistic:
+        one: Estadistica de DFP
+        other: Estadisticas de DFP
     attributes:
       user/active:
         true_value: Cliente Activo
         false_value: Cliente Inactivo
+      page_stadistic:
+        date: Fecha
+        pageviews: Paginas vistas
+        avgtimeonpage: Tiempo pagina
+      country_stadistic:
+        date: Fecha
+        pageviews: Paginas vistas
+        avgtimeonpage: Tiempo pagina
+        country_code: Codigo pais
+      dfp_stadistic:
+        date: Fecha
+        impressions: Impresiones
+
       user:
         name: Nombre
         current_sign_in_at: Actual inicio de sesion
