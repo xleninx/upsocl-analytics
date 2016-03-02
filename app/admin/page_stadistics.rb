@@ -14,6 +14,7 @@ ActiveAdmin.register PageStadistic do
   end
 
   filter :url
+  filter :url_id
   filter :date
 
   form do |f|
