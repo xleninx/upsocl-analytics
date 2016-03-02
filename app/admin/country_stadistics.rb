@@ -15,6 +15,7 @@ ActiveAdmin.register CountryStadistic do
   end
 
   filter :url
+  filter :url_id
   filter :date
   filter :country_code
 
