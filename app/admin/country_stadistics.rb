@@ -1,4 +1,7 @@
 ActiveAdmin.register CountryStadistic do
+  permit_params :pageviews, :avgtimeonpage
+  config.clear_action_items!
+  
   index do
     selectable_column
     column(:campaña) do |u|
