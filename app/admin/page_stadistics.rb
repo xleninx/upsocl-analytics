@@ -1,6 +1,5 @@
 ActiveAdmin.register PageStadistic do
-  permit_params :pageviews, :avgtimeonpage
-  config.clear_action_items!
+  permit_params :pageviews, :avgtimeonpage, :url_id, :date, :users, :sessions
 
   index do
     selectable_column
@@ -20,11 +19,4 @@ ActiveAdmin.register PageStadistic do
   filter :url_id
   filter :date
 
-  form do |f|
-    f.inputs "Estadistica por Pagina" do
-      f.input :pageviews
-      f.input :avgtimeonpage
-    end
-    f.actions
-  end
 end

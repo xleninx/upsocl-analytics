@@ -1,7 +1,6 @@
 ActiveAdmin.register CountryStadistic do
-  permit_params :pageviews, :avgtimeonpage
-  config.clear_action_items!
-  
+  permit_params :pageviews, :avgtimeonpage, :url_id, :date, :users, :country_code, :country_name
+
   index do
     selectable_column
     column(:campaña) do |u|
@@ -22,11 +21,4 @@ ActiveAdmin.register CountryStadistic do
   filter :date
   filter :country_code
 
-  form do |f|
-    f.inputs "Estadistica por pais" do
-      f.input :pageviews
-      f.input :avgtimeonpage
-    end
-    f.actions
-  end
 end
