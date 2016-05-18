@@ -16,5 +16,7 @@ $ ->
   $('.has_many_add').on 'click', ->
     setTimeout load_chosen, 100
 
-  $("#page_stadistic_url_id").chosen
+  $("#page_stadistic_url_id, #country_stadistic_url_id").chosen
+    allow_single_deselect: true
+    no_results_text: 'Sin resultados'
     width: "100%"

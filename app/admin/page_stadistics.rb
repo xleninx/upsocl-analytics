@@ -19,4 +19,15 @@ ActiveAdmin.register PageStadistic do
   filter :url_id
   filter :date
 
+  form do |f|
+    f.inputs "Estadisticas de pagina" do
+      f.input :url, :as => :select, :input_html => { :class => "chosen-input"}
+      f.input :date
+      f.input :avgtimeonpage
+      f.input :pageviews
+      f.input :users
+      f.input :sessions
+    end
+    f.actions
+  end
 end
