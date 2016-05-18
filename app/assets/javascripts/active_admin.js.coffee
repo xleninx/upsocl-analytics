@@ -1,7 +1,7 @@
 #= require active_admin/base
 #= require chosen.jquery.min
 $ ->
-  # enable chosen js
+
   $('.chosen-input').chosen
     allow_single_deselect: true
     no_results_text: 'Sin resultados'
@@ -15,3 +15,6 @@ $ ->
 
   $('.has_many_add').on 'click', ->
     setTimeout load_chosen, 100
+
+  $("#page_stadistic_url_id").chosen
+    width: "100%"
