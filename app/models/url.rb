@@ -7,6 +7,9 @@ class Url < ActiveRecord::Base
   has_many :country_stadistics
   has_many :device_stadistics
   has_many :traffic_stadistics
+  has_many :facebook_posts
+
+  accepts_nested_attributes_for :facebook_posts, allow_destroy: :true
 
   attr_accessor :params
   mount_uploader :screenshot, ScreenshotUploader
