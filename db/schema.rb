@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151214140128) do
+ActiveRecord::Schema.define(version: 20160520153650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(version: 20151214140128) do
     t.float    "avgtimeonpage"
   end
 
+  add_index "country_stadistics", ["url_id"], name: "index_country_stadistics_on_url_id", using: :btree
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -115,6 +117,8 @@ ActiveRecord::Schema.define(version: 20151214140128) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "device_stadistics", ["url_id"], name: "index_device_stadistics_on_url_id", using: :btree
+
   create_table "dfp_stadistics", force: :cascade do |t|
     t.integer  "url_id"
     t.date     "date"
@@ -127,6 +131,22 @@ ActiveRecord::Schema.define(version: 20151214140128) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "dfp_stadistics", ["url_id"], name: "index_dfp_stadistics_on_url_id", using: :btree
+
+  create_table "facebook_accounts", force: :cascade do |t|
+    t.string "name"
+    t.string "facebook_id"
+  end
+
+  create_table "facebook_posts", force: :cascade do |t|
+    t.string  "post_id"
+    t.integer "url_id"
+    t.integer "facebook_account_id"
+  end
+
+  add_index "facebook_posts", ["facebook_account_id"], name: "index_facebook_posts_on_facebook_account_id", using: :btree
+  add_index "facebook_posts", ["url_id"], name: "index_facebook_posts_on_url_id", using: :btree
+
   create_table "page_stadistics", force: :cascade do |t|
     t.integer  "url_id"
     t.date     "date"
@@ -138,6 +158,8 @@ ActiveRecord::Schema.define(version: 20151214140128) do
     t.integer  "users"
   end
 
+  add_index "page_stadistics", ["url_id"], name: "index_page_stadistics_on_url_id", using: :btree
+
   create_table "traffic_stadistics", force: :cascade do |t|
     t.integer  "url_id"
     t.date     "date"
@@ -146,6 +168,8 @@ ActiveRecord::Schema.define(version: 20151214140128) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
+
+  add_index "traffic_stadistics", ["url_id"], name: "index_traffic_stadistics_on_url_id", using: :btree
 
   create_table "urls", force: :cascade do |t|
     t.string   "data"
@@ -158,6 +182,8 @@ ActiveRecord::Schema.define(version: 20151214140128) do
     t.boolean  "publicity",       default: true
     t.datetime "data_updated_at"
   end
+
+  add_index "urls", ["campaign_id"], name: "index_urls_on_campaign_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
