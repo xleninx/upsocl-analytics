@@ -212,6 +212,10 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.10.0)
+    koala (2.3.0)
+      addressable
+      faraday
+      multi_json
     legato (0.5.2)
       multi_json
     loofah (2.0.3)
@@ -439,6 +443,7 @@ DEPENDENCIES
   google-oauth2-installed
   jbuilder (~> 2.0)
   jquery-rails
+  koala (~> 2.2)
   legato
   momentjs-rails
   pg
@@ -460,3 +465,6 @@ DEPENDENCIES
   validate_url
   web-console (~> 2.0)
   whenever
+
+BUNDLED WITH
+   1.11.2
