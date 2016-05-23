@@ -2,6 +2,7 @@
 capybara-*.html
 .rspec
 .env
+.env.production
 /log
 /bin
 /tmp
