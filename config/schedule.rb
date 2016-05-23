@@ -8,7 +8,7 @@
 set :environment, "production"
 set :output, "log/cron_log.log"
 #
-every 12.hours do
+every 1.day, :at => '10:00 am' do
   rake "analytics:add_records[day]"
 end
 #

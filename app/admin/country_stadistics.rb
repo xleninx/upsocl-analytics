@@ -21,4 +21,17 @@ ActiveAdmin.register CountryStadistic do
   filter :date
   filter :country_code
 
+  form do |f|
+    f.inputs "Estadisticas de país" do
+      f.input :url, :as => :select, :input_html => { :class => "chosen-input"}
+      f.input :date
+      f.input :country_name
+      f.input :country_code
+      f.input :pageviews
+      f.input :users
+      f.input :avgtimeonpage
+    end
+    f.actions
+  end
+
 end

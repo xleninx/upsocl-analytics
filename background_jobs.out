@@ -1,0 +1,8 @@
+nohup: ignoring input
+** Invoke jobs:work (first_time)
+** Invoke jobs:environment_options (first_time)
+** Invoke environment (first_time)
+** Execute environment
+** Execute jobs:environment_options
+** Execute jobs:work
+[Worker(host:dashboard pid:23082)] Starting job worker
