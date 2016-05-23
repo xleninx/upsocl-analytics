@@ -7,6 +7,9 @@ class Url < ActiveRecord::Base
   has_many :country_stadistics
   has_many :device_stadistics
   has_many :traffic_stadistics
+  has_many :facebook_posts
+
+  accepts_nested_attributes_for :facebook_posts, allow_destroy: :true
 
   attr_accessor :params
   mount_uploader :screenshot, ScreenshotUploader
@@ -23,6 +26,19 @@ class Url < ActiveRecord::Base
 
   def social_count
     SocialShares.selected data, %w(facebook google twitter)
+  end
+
+  def total_count_facebook
+    counts = { likes: 0, comments: 0, shares: 0 }
+    if facebook_posts.any?
+      facebook_posts.each do |fbp|
+        fbc = FacebookConnection.new(fbp.post_id, fbp.account_id)
+        counts[:likes] = counts[:likes] + fbc.count_likes.to_i
+        counts[:comments] = counts[:comments] + fbc.count_comments.to_i
+        counts[:shares] = counts[:shares] + fbc.count_shares.to_i
+      end
+    end
+    counts
   end
 
   def set_title
