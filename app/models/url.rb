@@ -15,7 +15,7 @@ class Url < ActiveRecord::Base
   mount_uploader :screenshot, ScreenshotUploader
 
   validates :data, presence: true, url: { no_local: true, message: 'el formato no es correto' }
-  validates :line_id, presence: true
+  validates :line_id, :profile_id, presence: true
 
   before_save :set_title
   after_create :make_screenshot, :run_analytics_task
