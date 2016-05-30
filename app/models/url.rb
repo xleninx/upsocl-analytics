@@ -1,5 +1,5 @@
 class Url < ActiveRecord::Base
-
+  has_enumeration_for :interval_status, with: IntervalStatus, create_scopes: { prefix: true }, create_helpers: true
   belongs_to :campaign
   has_and_belongs_to_many :countries
   has_many :page_stadistics
@@ -22,8 +22,7 @@ class Url < ActiveRecord::Base
   before_update :run_bg_task
   before_destroy { |record| clean_screenshot(record.id) }
 
-  scope :update_interval, -> (interval_start, interval_end) { where('created_at between ? and ?', interval_start, interval_end) }
-
+  scope :update_interval, -> (interval_start, interval_end, interval) { where('(data_updated_at between ? and ? AND created_at between ? and ?) or (data_updated_at between ? and ? AND interval_status = ?)', interval_start, interval_end, interval_start, interval_end, interval_start, interval_end, IntervalStatus.value_for(interval)) }
   def social_count
     SocialShares.selected data, %w(facebook google twitter)
   end
@@ -37,6 +36,9 @@ class Url < ActiveRecord::Base
         counts[:comments] = counts[:comments] + fbc.count_comments.to_i
         counts[:shares] = counts[:shares] + fbc.count_shares.to_i
       end
+    else
+      info_social = SocialShares.selected data, %w(facebook)
+      counts = { likes: info_social[:facebook]["like_count"], comments: info_social[:facebook]["comment_count"], shares: info_social[:facebook]["share_count"] }
     end
     counts
   end
