@@ -1,5 +1,5 @@
 class Url < ActiveRecord::Base
-
+  has_enumeration_for :interval_status, with: IntervalStatus, create_scopes: { prefix: true }, create_helpers: true
   belongs_to :campaign
   has_and_belongs_to_many :countries
   has_many :page_stadistics
@@ -7,22 +7,40 @@ class Url < ActiveRecord::Base
   has_many :country_stadistics
   has_many :device_stadistics
   has_many :traffic_stadistics
+  has_many :facebook_posts
+
+  accepts_nested_attributes_for :facebook_posts, allow_destroy: :true
 
   attr_accessor :params
   mount_uploader :screenshot, ScreenshotUploader
 
   validates :data, presence: true, url: { no_local: true, message: 'el formato no es correto' }
-  validates :line_id, presence: true
+  validates :line_id, :profile_id, presence: true
 
   before_save :set_title
   after_create :make_screenshot, :run_analytics_task
   before_update :run_bg_task
   before_destroy { |record| clean_screenshot(record.id) }
 
-  scope :update_interval, -> (interval_start, interval_end) { where('created_at between ? and ?', interval_start, interval_end) }
-
+  scope :update_interval, -> (interval_start, interval_end, interval) { where('(data_updated_at between ? and ? AND created_at between ? and ?) or (data_updated_at between ? and ? AND interval_status = ?)', interval_start, interval_end, interval_start, interval_end, interval_start, interval_end, IntervalStatus.value_for(interval)) }
   def social_count
     SocialShares.selected data, %w(facebook google twitter)
+  end
+
+  def total_count_facebook
+    counts = { likes: 0, comments: 0, shares: 0 }
+    if facebook_posts.any?
+      facebook_posts.each do |fbp|
+        fbc = FacebookConnection.new(fbp.post_id, fbp.account_id)
+        counts[:likes] = counts[:likes] + fbc.count_likes.to_i
+        counts[:comments] = counts[:comments] + fbc.count_comments.to_i
+        counts[:shares] = counts[:shares] + fbc.count_shares.to_i
+      end
+    else
+      info_social = SocialShares.selected data, %w(facebook)
+      counts = { likes: info_social[:facebook]["like_count"], comments: info_social[:facebook]["comment_count"], shares: info_social[:facebook]["share_count"] }
+    end
+    counts
   end
 
   def set_title
