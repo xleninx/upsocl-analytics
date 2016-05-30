@@ -1,7 +1,11 @@
 class AnalyticConnection
   def initialize
     @user = Legato::User.new GoogleOauth2Installed.access_token
-    @profile = @user.profiles.last
+    @profile = @user.profiles.first
+  end
+
+  def user
+    @user
   end
 
   def data_for(source:'', url:'')
