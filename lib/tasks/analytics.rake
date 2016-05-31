@@ -2,10 +2,11 @@ namespace :analytics do
   desc "Call Google Analytics Api for get data of url"
   task :add_records, [:time, :interval, :url_id] => :environment do |t, args|
     time_range(args.time)
-    interval_range(args.interval)
-
+    arg_interval = args.interval
+    interval_range(arg_interval)
     if args.url_id.nil?
-      urls = Url.all.update_interval(@start_interval, @end_interval)
+      interval = interval_status(arg_interval)
+      urls = Url.all.update_interval(@start_interval, @end_interval, interval.upcase)
     else
       urls = [Url.find(args.url_id)]
     end
@@ -13,10 +14,10 @@ namespace :analytics do
     urls.each do |url|
       puts "|||||| --- Updating url with id [#{url.id}] --- |||||||"
 
-      page_stadistics = AnalyticConnection.new.historical_data_for(source: 'Page', url: url.only_path, start_date: @start_date, end_date: @end_date)
-      country_stadistics = AnalyticConnection.new.historical_data_for(source: 'Country', url: url.only_path, start_date: @start_date, end_date: @end_date)
-      traffic_stadistics = AnalyticConnection.new.historical_data_for(source: 'Traffic', url: url.only_path, start_date: @start_date, end_date: @end_date)
-      device_stadistics = AnalyticConnection.new.historical_data_for(source: 'Device', url: url.only_path, start_date: @start_date, end_date: @end_date)
+      page_stadistics = AnalyticConnection.new(url.profile_id).historical_data_for(source: 'Page', url: url.only_path, start_date: @start_date, end_date: @end_date)
+      country_stadistics = AnalyticConnection.new(url.profile_id).historical_data_for(source: 'Country', url: url.only_path, start_date: @start_date, end_date: @end_date)
+      traffic_stadistics = AnalyticConnection.new(url.profile_id).historical_data_for(source: 'Traffic', url: url.only_path, start_date: @start_date, end_date: @end_date)
+      device_stadistics = AnalyticConnection.new(url.profile_id).historical_data_for(source: 'Device', url: url.only_path, start_date: @start_date, end_date: @end_date)
       dfp_stadistics = DfpConnection.new.run_report(start_date: @start_date, end_date: @end_date, item_id: url.line_id)
 
       page_stadistics.each do |data|
@@ -77,5 +78,9 @@ namespace :analytics do
       @start_interval = 3.week.ago
       @end_interval = Time.now
     end
+  end
+
+  def interval_status(time)
+    (time == '6month') ? 'month6' : time
   end
 end
