@@ -34,7 +34,7 @@ ActiveAdmin.register Campaign do
       f.input :users, :as => :select, :input_html => {:multiple => true, :class => "chosen-input"}
     end
     f.inputs do
-      f.has_many :urls, heading: 'Direcciones Url', allow_destroy: true, new_record: 'Añadir' do |a|
+      f.has_many :urls, heading: 'Direcciones Url', allow_destroy: true, new_record: 'Añadir', class: 'panel_urls' do |a|
         a.input :data, label: 'URL'
         a.input :screenshot
         a.input :line_id, label: 'Line ID', :input_html => { :type => 'text' }
