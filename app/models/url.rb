@@ -23,7 +23,8 @@ class Url < ActiveRecord::Base
   before_update :run_bg_task
   before_destroy { |record| clean_screenshot(record.id) }
 
-  scope :update_interval, -> (interval_start, interval_end, interval) { where('(data_updated_at between ? and ? AND created_at between ? and ?) or (data_updated_at between ? and ? AND interval_status = ?)', interval_start, interval_end, interval_start, interval_end, interval_start, interval_end, IntervalStatus.value_for(interval)) }
+  scope :update_interval, -> (interval_start, interval_end, interval) { where( '(data_updated_at between ? and ? AND interval_status = ?) or (interval_status = ?)', interval_start, interval_end, IntervalStatus::DEFAULT ,IntervalStatus.value_for( interval ) ) }
+
   def social_count
     SocialShares.selected data, %w(facebook google twitter)
   end
@@ -51,7 +52,7 @@ class Url < ActiveRecord::Base
   end
 
   def set_update_date
-    self.data_updated_at = Time.now
+    self.data_updated_at = self.created_at
   end
 
   def run_bg_task
@@ -62,7 +63,7 @@ class Url < ActiveRecord::Base
   end
 
   def run_analytics_task
-    Rake::Task["analytics:add_records"].invoke('week', id)
+    Rake::Task["analytics:add_records"].invoke('week', 'day', id)
   end
   handle_asynchronously :run_analytics_task
 
