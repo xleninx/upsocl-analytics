@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.4'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'font-awesome-rails', '4.3.0.0'
+gem 'sqlite3'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -35,6 +36,7 @@ gem 'underscore-rails'
 
 # Date format for js
 gem 'momentjs-rails'
+gem 'bootstrap-daterangepicker-rails'
 
 # Decorators gem
 gem 'draper', '~> 1.3'
@@ -50,6 +52,9 @@ gem 'legato'
 
 # Angular templates
 gem 'angular-rails-templates'
+gem 'angularjs-rails'
+gem 'angularjs-rails-resource', '~> 2.0.0'
+gem 'angular-ui-router-rails'
 
 # Manage assets
 gem "bower-rails", "~> 0.10.0"

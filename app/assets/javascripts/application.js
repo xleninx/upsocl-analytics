@@ -19,11 +19,9 @@
 //= require underscore
 //= require slimscroll/jquery.slimscroll.min
 //= require angular
-//= require angular-resource/angular-resource
-//= require angular-daterangepicker/js/angular-daterangepicker.min
-//= require angular-ui-router/release/angular-ui-router
-//= require bootstrap-daterangepicker/daterangepicker.js
 //= require angular-rails-templates
+//= require angularjs/rails/resource
+//= require angular-ui-router
 //= require_tree ./services
 //= require_tree ./controllers
 //= require app
